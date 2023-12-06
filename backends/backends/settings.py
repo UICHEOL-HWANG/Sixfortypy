@@ -85,6 +85,8 @@ WSGI_APPLICATION = 'backends.wsgi.application'
 #     }
 # }
 
+# 추후에 웹 모듈 모두 완성하면 이걸로 대체 할 예정
+
 
 DATABASES = {
     'default': {
