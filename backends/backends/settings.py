@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os 
+import pymysql
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-w$n*&qk^$2g5ki5yi!&=0#kpygbxb5s78^y+o*!b#2d)0(bp8#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,20 +75,23 @@ WSGI_APPLICATION = 'backends.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+# pymysql.install_as_MySQLdb() 
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'test_db',
 #         'USER': 'admin',
 #         'PASSWORD': '1234',
-#         'HOST': 'mysqldb_test',
-#         'PORT': '3307',
+#         'HOST': 'db',
+#         'PORT': '3306',
 #     }
 # }
 
 # 추후에 웹 모듈 모두 완성하면 이걸로 대체 할 예정
 
-
+# 기본 데이터베이스
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

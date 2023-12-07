@@ -2,18 +2,15 @@ version: '3.8'
 
 services:
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
     container_name: web_django
-    restart: always
     ports:
-      - "8000:8000"
+      - 8000:8000
     volumes:
-      - ./backends:/usr/src/app
+      - ./:/usr/src/app/
     environment:
       DJANGO_SETTINGS_MODULE: backends.settings
-
     depends_on:
       - db
 
