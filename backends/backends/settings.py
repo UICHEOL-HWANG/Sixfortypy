@@ -138,6 +138,11 @@ STATIC_URL = 'frontend/'
 STATIC_ROOT = os.path.join(BASE_DIR,'_frontend')
 
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend')
+] # 모든 frontend 구역은 메인 backend 디렉토리의 static 디렉토리로 통합시킴 
+
+
 MEDIA_URL = "upload/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "upload")
 
