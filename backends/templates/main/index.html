@@ -1,8 +1,155 @@
-{% extends "base/base.html" %}
+<!DOCTYPE html>
+<html lang="ko">
 
-{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/slick.css" />
+    <!-- <link rel="stylesheet" href="./css/slick-theme.css"/> -->
+    <link rel="stylesheet" href="./css/main.css">
 
-{% block content %}
-    <h1>Hello! World!!</h1>
-    <h1>dd</h1>
-{% endblock content %}
+    <script src="./js/jquery-3.5.0.min.js"></script>
+    <script src="./js/jquery-ui.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/slick.js"></script>
+    <script type="text/javascript" src="./js/slick.min.js"></script>
+    <script src="./js/main.js"></script>
+    <title>Sixtyforty</title>
+</head>
+
+<body>
+    <!-- 헤더 -->
+    <header>
+        <!-- 1-1.로고 -->
+        <h1 id="logo">
+            <a href="#">
+                Sixtyforty
+            </a>
+        </h1>
+        <!-- 1-2.GNB메뉴 -->
+        <nav class="gnb">
+            <ul>
+                <li class="on">
+                    <a href="#">장르별</a>
+                </li>
+                <li>
+                    <a href="#">아티스트별</a>
+                </li>
+                <li>
+                    <a href="#">추천</a>
+                </li>
+                <li>
+                    <a href="#">로그인</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- 메인 -->
+    <section>
+        <div class="container">
+            <div class="top_box">
+                <div class="input-group mb-3">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Dropdown</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                </div>
+                <h2>Sixtyforty <br>
+                    Recommend
+                </h2>
+
+                <!-- <div class="satellites">
+                    <span >M</span>
+                    <span >U</span>
+                    <span >S</span>
+                    <span >I</span>
+                    <span >C</span>
+                    <span >&nbsp;</span>
+                    <span >R</span>
+                    <span >E</span>
+                    <span >C</span>
+                    <span >O</span>
+                    <span >M</span>
+                    <span >M</span>
+                    <span >E</span>
+                    <span >N</span>
+                    <span >D</span>
+                </div> -->
+            </div>
+            <div class="bottom_box">
+                <div class="post-slider">
+                    <div class="silder-title">
+                        Sixtyforty PlayList
+                    </div>                
+                    <div class="post-wrapper">
+                        <div class="post">
+                            <div class="slider-image">노래이미지
+                                <img src="./images/cast02.jpg" alt="노래1">
+                            </div>
+                            <div class="post-info">노래설명</div>
+                        </div>
+                        <div class="post">
+                            <div class="slider-image">노래이미지
+                                <img src="./images/cast03.jpg" alt="노래1">
+                            </div>
+                            <div class="post-info">노래설명</div>
+                        </div>
+                        <div class="post">
+                            <div class="slider-image">노래이미지
+                                <img src="./images/cast02.jpg" alt="노래1">
+                            </div>
+                            <div class="post-info">노래설명</div>
+                        </div>
+                        <div class="post">
+                            <div class="slider-image">노래이미지
+                                <img src="./images/cast03.jpg" alt="노래1">
+                            </div>
+                            <div class="post-info">노래설명</div>
+                        </div>
+                        <div class="post">
+                            <div class="slider-image">노래이미지
+                                <img src="./images/cast02.jpg" alt="노래1">
+                            </div>
+                            <div class="post-info">노래설명</div>
+                        </div>
+                        <div class="post">
+                            <div class="slider-image">노래이미지
+                                <img src="./images/cast03.jpg" alt="노래1">
+                            </div>
+                            <div class="post-info">노래설명</div>
+                        </div>
+                        <div class="post">
+                            <div class="slider-image">노래이미지
+                                <img src="./images/cast02.jpg" alt="노래1">
+                            </div>
+                            <div class="post-info">노래설명</div>
+                        </div>
+                        <div class="post">
+                            <div class="slider-image">노래이미지
+                                <img src="./images/cast03.jpg" alt="노래1">
+                            </div>
+                            <div class="post-info">노래설명</div>
+                        </div>
+                    </div>
+                    <button class="prev">&lt;</button>
+                    <button class="next">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 푸터 -->
+    <footer>
+
+    </footer>
+</body>
+
+</html>
