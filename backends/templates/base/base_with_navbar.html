@@ -1,0 +1,32 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block header %}
+<!-- 헤더 -->
+    <header>
+        <!-- 1-1.로고 -->
+        <h1 id="logo">
+            <a href="#">
+                Sixtyfortypy
+            </a>
+        </h1>
+        <!-- 1-2.GNB메뉴 -->
+        <nav class="gnb">
+            <ul>
+                <li class="on">
+                    <a href="#">장르별</a>
+                </li>
+                <li>
+                    <a href="#">아티스트별</a>
+                </li>
+                <li>
+                    <a href="#">추천</a>
+                </li>
+                <li>
+                    <a href="#">로그인</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+{% endblock header %}
