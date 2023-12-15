@@ -10,9 +10,9 @@ def index(request):
 
 
 class MusicList(ListView):
-    model = Music 
+    model = Song 
     template_name = 'main/list_page.html'
-    context_object_name = "music"
+    context_object_name = "song"
     paginate_by = 20
     
     

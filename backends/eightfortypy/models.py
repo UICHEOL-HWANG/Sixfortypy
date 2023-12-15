@@ -24,13 +24,27 @@ class Profile(models.Model):
         return self.nickname
     
 
-class Music(models.Model):
-    Album = models.CharField(max_length=30)
-    Title = models.CharField(max_length=30)
-    Genre = models.CharField(max_length=30)
-    Release_Date = models.DateField()
-    Album_Image = models.ImageField(upload_to='Album_pics',blank=True)
-    Artist = models.CharField(max_length=15)
-    Poplularity = models.IntegerField()
-    Artist_Image = models.ImageField(upload_to='Artist_pics',blank=True)
-    
+class Artist(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='artist_pics', blank=True)
+
+    def __str__(self):
+        return self.name
+
+class Album(models.Model):
+    title = models.CharField(max_length=100)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='albums')
+    release_date = models.DateField()
+    genre = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='album_pics', blank=True)
+
+    def __str__(self):
+        return self.title
+
+class Song(models.Model):
+    title = models.CharField(max_length=100)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='songs')
+    popularity = models.IntegerField()
+
+    def __str__(self):
+        return self.title
