@@ -1,8 +1,50 @@
-{% extends "base/base_with_navbar.html" %}
+<!DOCTYPE html>
+<html lang="ko">
 
-{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/slick.css" />
+    <!-- <link rel="stylesheet" href="./css/slick-theme.css"/> -->
+    <link rel="stylesheet" href="./css/main.css">
 
-{% block content %}
+    <script src="./js/jquery-3.5.0.min.js"></script>
+    <script src="./js/jquery-ui.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/slick.js"></script>
+    <script type="text/javascript" src="./js/slick.min.js"></script>
+    <script src="./js/main.js"></script>
+    <title>Sixtyforty</title>
+</head>
+
+<body>
+    <!-- 헤더 -->
+    <header>
+        <!-- 1-1.로고 -->
+        <h1 id="logo">
+            <a href="#">
+                Sixtyforty
+            </a>
+        </h1>
+        <!-- 1-2.GNB메뉴 -->
+        <nav class="gnb">
+            <ul>
+                <li class="on">
+                    <a href="#">장르별</a>
+                </li>
+                <li>
+                    <a href="#">아티스트별</a>
+                </li>
+                <li>
+                    <a href="#">추천</a>
+                </li>
+                <li>
+                    <a href="#">로그인</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
     <!-- 메인 -->
     <section>
         <div class="container">
@@ -24,7 +66,9 @@
                 <h2>Sixtyforty <br>
                     Recommend
                 </h2>
-
+                <div class="record">
+                    <!-- <img src="./images/record.png" alt="레코드판"> -->
+                </div>
                 <!-- <div class="satellites">
                     <span >M</span>
                     <span >U</span>
@@ -51,13 +95,13 @@
                     <div class="post-wrapper">
                         <div class="post">
                             <div class="slider-image">노래이미지
-                                <img src="{% static 'images/cast02.jpg' %}" alt="노래1">
+                                <img src="./images/cast02.jpg" alt="노래1">
                             </div>
                             <div class="post-info">노래설명</div>
                         </div>
                         <div class="post">
                             <div class="slider-image">노래이미지
-                                <img src="{% static 'images/cast03.jpg' %}" alt="노래1">
+                                <img src="./images/cast03.jpg" alt="노래1">
                             </div>
                             <div class="post-info">노래설명</div>
                         </div>
@@ -108,4 +152,28 @@
     <footer>
 
     </footer>
-{% endblock content %}
+    <!-- <script>
+        $(document).ready(function () {
+            $('.post-wrapper').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                nextArrow: $('.next'),
+                prevArrow: $('.prev'),
+            });
+
+            // 이전 버튼 클릭 시 이벤트
+            $('.prev').click(function () {
+                $('.post-wrapper').slick('slickPrev');
+            });
+
+            // 다음 버튼 클릭 시 이벤트
+            $('.next').click(function () {
+                $('.post-wrapper').slick('slickNext');
+            });
+        });
+    </script> -->
+</body>
+
+</html>
