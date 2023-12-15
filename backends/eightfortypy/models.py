@@ -27,7 +27,8 @@ class Profile(models.Model):
 class Artist(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='artist_pics', blank=True)
-
+    id = models.CharField(max_length=30)
+    genres = models.CharField(max_length=50)
     def __str__(self):
         return self.name
 
@@ -35,9 +36,7 @@ class Album(models.Model):
     title = models.CharField(max_length=100)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='albums')
     release_date = models.DateField()
-    genre = models.CharField(max_length=50)
     image = models.ImageField(upload_to='album_pics', blank=True)
-
     def __str__(self):
         return self.title
 
@@ -45,6 +44,7 @@ class Song(models.Model):
     title = models.CharField(max_length=100)
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='songs')
     popularity = models.IntegerField()
-
+    id = models.CharField(max_length=30)
+    link = models.CharField(max_length=100)
     def __str__(self):
         return self.title
