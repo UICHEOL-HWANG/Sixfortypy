@@ -22,3 +22,11 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.nickname
+    
+
+class Music(models.Model):
+    Album = models.CharField(max_length=30)
+    Title = models.CharField(max_length=30)
+    Genre = models.CharField(max_length=30)
+    Release_Date = models.DateField()
+    Album_Image = models.ImageField(upload_to='Album_pics',blank=True)
