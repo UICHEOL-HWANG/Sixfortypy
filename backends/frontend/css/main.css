@@ -80,6 +80,11 @@ header #logo a {
   font-size: 20px;
 }
 
+/* 로고 */
+header #logo img{
+  width: 150px;
+}
+
 header .gnb {
   float: right;
   margin-right: 40px;
