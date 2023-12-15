@@ -4,4 +4,5 @@ from .models import *
 
 urlpatterns = [
     path('',views.index,name="index"),
+    path('music_list/',views.MusicList.as_view(),name="music-list")
 ]
