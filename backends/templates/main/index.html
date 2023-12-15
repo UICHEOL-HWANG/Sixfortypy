@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,3 +11,100 @@
     <h1>dd</h1>
 </body>
 </html>
+=======
+{% extends 'base/base_with_navbar.html' %}
+
+
+{% load static %}
+
+
+{% block content %}
+<!-- 메인 -->
+<section>
+    <div class="container">
+        <div class="top_box">
+            <div class="input-group mb-3">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">Search</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Artist</a></li>
+                    <li><a class="dropdown-item" href="#">Track</a></li>
+                    <li><a class="dropdown-item" href="#">Genre</a></li>
+                    <!-- <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+                </ul>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            </div>
+            <h2>Sixfortypy <br>
+                Recommend
+            </h2>
+            <div class="record">
+                <!-- <img src="./images/record.png" alt="레코드판"> -->
+            </div>
+
+        </div>
+        <div class="bottom_box">
+            <div class="post-slider">
+                <div class="silder-title">
+                    Sixtyforty PlayList
+                </div>
+                <div class="post-wrapper">
+                    <div class="post">
+                        <div class="slider-image">노래이미지
+                            <img src="./images/cast02.jpg" alt="노래1">
+                        </div>
+                        <div class="post-info">노래설명</div>
+                    </div>
+                    <div class="post">
+                        <div class="slider-image">노래이미지
+                            <img src="./images/cast03.jpg" alt="노래1">
+                        </div>
+                        <div class="post-info">노래설명</div>
+                    </div>
+                    <div class="post">
+                        <div class="slider-image">노래이미지
+                            <img src="./images/cast02.jpg" alt="노래1">
+                        </div>
+                        <div class="post-info">노래설명</div>
+                    </div>
+                    <div class="post">
+                        <div class="slider-image">노래이미지
+                            <img src="./images/cast03.jpg" alt="노래1">
+                        </div>
+                        <div class="post-info">노래설명</div>
+                    </div>
+                    <div class="post">
+                        <div class="slider-image">노래이미지
+                            <img src="./images/cast02.jpg" alt="노래1">
+                        </div>
+                        <div class="post-info">노래설명</div>
+                    </div>
+                    <div class="post">
+                        <div class="slider-image">노래이미지
+                            <img src="./images/cast03.jpg" alt="노래1">
+                        </div>
+                        <div class="post-info">노래설명</div>
+                    </div>
+                    <div class="post">
+                        <div class="slider-image">노래이미지
+                            <img src="./images/cast02.jpg" alt="노래1">
+                        </div>
+                        <div class="post-info">노래설명</div>
+                    </div>
+                    <div class="post">
+                        <div class="slider-image">노래이미지
+                            <img src="./images/cast03.jpg" alt="노래1">
+                        </div>
+                        <div class="post-info">노래설명</div>
+                    </div>
+                </div>
+                <button class="prev">&lt;</button>
+                <button class="next">&gt;</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+>>>>>>> 73febb627c5d4169bd5aa72a967fad42082c8ac2
