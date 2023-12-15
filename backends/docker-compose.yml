@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    container_name: web_django
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/usr/src/app/
+    environment:
+      DJANGO_SETTINGS_MODULE: backends.settings
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    container_name: mysqldb_test
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "1234"
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: "1234"
+    ports:
+      - "3307:3306"
+    volumes:
+      - /path/to/your/mysql-data:/var/lib/mysql
+    command: --bind-address=0.0.0.0
