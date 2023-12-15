@@ -1,10 +1,8 @@
+/* 구글시트불러오기 */
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap');
+/* font-family: 'Dongle', sans-serif; */
+
 /*  공통 css  */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap');
-
-*{
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
 html,
 body {
   margin: 0;
@@ -64,25 +62,28 @@ h3 {
 
 /* header */
 header {
+  position: relative;
   width: 100%;
-  height: 60px;
-  padding-top: 20px;
-  z-index: 5;
+  height: 80px;
+  padding-top: 25px;
+  z-index: 10;
+  /* border: 1px solid red; */
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 header #logo {
   display: inline-block;
   height: 100%;
-  margin-left: 40px;
 }
 
 header #logo a {
-  font-size: 20px;
+  font-size: 40px;
+  font-family: 'Dongle', sans-serif;
 }
 
-/* 로고 */
-header #logo img{
-  width: 150px;
+header #logo a img {
+  width: 100%;
 }
 
 header .gnb {
@@ -128,6 +129,10 @@ header .gnb li {
   --bs-gradient: none;
 }
 
+.top_box .input-group li{
+  float: none;
+}
+
 
 /* 검색창 옆 돌아가는 css(레코드판) */
 .top_box .record {
@@ -135,7 +140,7 @@ header .gnb li {
   background: url(../images/record.png) no-repeat center/contain;
   width: 600px;
   height: 600px;
-  right: -5%;
+  right: 115px;
   top: -5%;
   opacity: .6;
   animation: rotate 1s linear infinite;
@@ -281,25 +286,23 @@ header .gnb li {
 
 .post-slider .next {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
   top: 50%;
-  right: 30px;
+  right: -50px;
   font-size: 2em;
-  color: gray;
+  border: none;
+  background: none;
+  color: white;
   cursor: pointer;
 }
 
 .post-slider .prev {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
   top: 50%;
-  left: 30px;
+  left: -50px;
   font-size: 2em;
-  color: gray;
+  border: none;
+  background: none;
+  color: white;
   cursor: pointer;
 }
 
@@ -428,15 +431,45 @@ header .gnb li {
 
 /* sub page(detail_page) css */
 .select_play{
+  display: flex;
   margin: 50px 0 70px 0;
   padding: 20px;
+  contain: content;
 }
 
 .select_play .thumb{
   max-width: 300px;
   width: 42%;
 }
-
 .select_play .thumb img{
   width: 100%;
+}
+
+.select_play .thumb_info{
+  padding: 20px;
+  width: 45%;
+}
+
+.select_play .thumb_info .song_name{
+  font-size: 32px;
+}
+
+.select_play .thumb_info .artist{
+  font-size: 22px;
+}
+
+.select_play .thumb_info .song_info{
+  margin-top: 40px;
+}
+
+.select_play .thumb_info .song_info dt{
+  width: 80px;
+  float: left;
+  color: #999;
+  font-weight: 500;
+}
+
+.select_play .thumb_info .song_info dd{
+  /* width: 80px;
+  float: left; */
 }
