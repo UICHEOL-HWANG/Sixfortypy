@@ -473,3 +473,157 @@ header .gnb li {
   /* width: 80px;
   float: left; */
 }
+
+/* account */
+
+.account-background {
+  flex-grow: 1;
+}
+.account-background::before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
+  opacity: 0.5;
+}
+
+.account {
+  margin: 200px auto;
+  max-width: 450px;
+  width: 100%;
+}
+
+.account .title {
+  margin: 24px auto;
+  text-align: center;
+}
+
+.account .logo {
+  width: 200px;
+}
+
+.account .form-error {
+  text-align: center;
+}
+
+.account .info {
+  width: max-content;
+  margin: 25px auto;
+}
+
+.account button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+.account .info .item {
+  display: inline-block;
+  min-width: 140px;
+  padding: 0 21px;
+}
+
+.account .info .item + .item {
+  border-left: 1px solid #e3e1dc;
+}
+
+.account .info .link {
+  margin-left: 13px;
+  color: #7bd3f7;
+}
+
+.account form {
+  display: flex;
+  flex-direction: column;
+}
+
+.account form > :not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.account form .checkbox {
+  padding: 4px;
+  text-align: right;
+}
+
+/* account-password */
+
+.account-password {
+  margin: 100px auto;
+  padding: 68px 150px;
+  max-width: 740px;
+  width: 100%;
+}
+
+.account-password .title {
+  margin: 24px auto;
+  text-align: center;
+}
+
+.account-password .heading {
+  font-size: 25px;
+  font-weight: normal;
+}
+
+.account-password form > :not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.account-password button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin: 20px 0 25px;
+}
+
+.account-password-dialog {
+  margin: 100px auto;
+  text-align: center;
+  width: 100%;
+}
+
+.account-password-dialog .button {
+  margin-top: 5px;
+}
+
+  .cp-input {
+    width: 100%;
+    font-size: 17px;
+    letter-spacing: -0.3px;
+    padding: 16px 24px;
+    border: 1px solid white;
+    background-color: white;
+    outline: none;
+    border-radius: 7px;
+}
+
+.cp-button{
+  border: none;
+    outline: none;
+    padding: 16px 28px;
+    border-radius: 9999px;
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: -0.32px;
+    cursor: pointer;
+    background-color: black;
+    border: 1px solid;
+    color: white;
+}
+
+.login-logo{
+  width: 300px;
+}
+
+.signup-logo{
+  width: 300px;
+}
+
+.info{
+  color: white;
+}
