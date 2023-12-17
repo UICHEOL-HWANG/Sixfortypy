@@ -1,0 +1,14 @@
+{% extends "base/base_with_header.html" %}
+
+{% block content %}
+<div class="cp-dialog info account-password-dialog denied-dialog">
+  <div class="denied">
+    <p>이메일 인증이 완료되었습니다. 감사합니다.</p>
+  </div>
+  {% if user.is_authenticated %}
+  <div class="btn-invered"><a class="cp-button inverted button" href="{% url 'index' %}">홈으로 이동</a></div>
+  {% else %}
+  <div class="btn-invered"><a class="cp-button inverted button" href="{% url 'account_login' %}">로그인 하기</a></div>
+  {% endif %}
+</div>
+{% endblock content %}

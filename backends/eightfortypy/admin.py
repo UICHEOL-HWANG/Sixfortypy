@@ -5,6 +5,8 @@ from django.contrib.auth.admin import UserAdmin
 
 admin.site.register(User,UserAdmin)
 
+UserAdmin.fieldsets += (('Custom fields',{'fields':('nickname','profile_pic','intro')}),)
+
 class ArtistAdmin(admin.ModelAdmin):
     list_display = ('name',)  # 관리자 페이지에서 표시할 필드
     search_fields = ('name',)  # 검색 기능에 사용할 필드

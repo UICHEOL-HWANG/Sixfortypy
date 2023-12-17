@@ -27,6 +27,13 @@ a {
   /* text-shadow: 0 0 2px #777; */
 }
 
+
+
+/* gnb */
+.gnb{
+  font-weight: 900;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -75,6 +82,7 @@ header {
 header #logo {
   display: inline-block;
   height: 100%;
+  margin-top: -6px;
 }
 
 header #logo a {
@@ -627,3 +635,231 @@ header .gnb li {
 .info{
   color: white;
 }
+
+/* base_with_header */
+
+.site-header.only-logo {
+  margin: 18px auto;
+}
+
+.max-content-width {
+  max-width: 1000px;
+  width: 100%;
+}
+
+/* account */
+
+.heading{
+  color: white;
+}
+.account-password {
+  margin: 100px auto;
+  padding: 68px 150px;
+  max-width: 740px;
+  width: 100%;
+}
+
+.account-password .title {
+  margin: 24px auto;
+  text-align: center;
+}
+
+.account-password .heading {
+  font-size: 25px;
+  font-weight: normal;
+}
+
+.account-password form > :not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.account-password button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin: 20px 0 25px;
+}
+
+.account-password-dialog {
+  margin: 100px auto;
+  text-align: center;
+  width: 100%;
+}
+
+.account-password-dialog .button {
+  margin-top: 5px;
+}
+
+/* profile */
+
+.profile-header .username {
+  font-size: 22px;
+  margin: 7px 9px;
+}
+
+.profile-header .edit:first-of-type {
+  margin-left: 9px;
+}
+
+.profile-header .edit {
+  display: inline-block;
+  font-size: 15px;
+  color:  #7b776b;
+  margin-bottom: 16px;
+}
+
+.profile-header .intro {
+  margin: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.cp-chip {
+  display: inline-block;
+  padding: 0 17px;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 32px;
+  color: white;
+  border: 1px solid #e3e1dc;
+  border-radius: 9999px;
+}
+
+.profile-header {
+  padding: 46px 10px 60px;
+  background: #15191cd4;
+  position: relative;
+}
+
+.profile-header .content {
+  display: flex;
+  margin: 0 auto;
+  overflow: hidden;
+  align-items: center;
+}
+
+.cp-avatar.large {
+  width: 100px;
+  height: 100px;
+}
+
+.profile-header .profile-pic {
+  flex-shrink: 0;
+  margin-right: 15px;
+}
+
+.cp-avatar {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--avatar-placeholder);
+  background-size: cover;
+  background-position: center;
+}
+
+.content-list .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 15px 25px 25px;
+}
+
+.content-list {
+  margin: 72px auto 340px;
+}
+
+.content-list .header h2 {
+  font-size: 22px;
+  color: white;
+  margin: 0;
+  font-weight: 900;
+}
+
+
+/* music content */
+
+.content-list .contents {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 46px 40px;
+}
+
+/* empty 만약 비어있을 경우 */
+
+.content-list .contents .empty {
+  margin: 120px auto;
+  font-weight: bold;
+  font-size: 40px;
+  grid-column: span 2;
+  text-align: center;
+  color: white;
+}
+
+/* profile-set */
+.profile-form {
+  margin: 100px auto;
+  max-width: 440px;
+  width: 100%;
+}
+
+.profile-form form > :not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.buttons{
+  text-align: center;
+  gap: 20px;
+}
+.profile-form .buttons > button[type="submit"] {
+  flex-grow: 4;
+}
+
+.profile-form .buttons > :not(:last-child) {
+  margin-right: 9px;
+}
+
+.profile-form .profile {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+
+/* avatar */
+
+.cp-avatar {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--avatar-placeholder);
+  background-size: cover;
+  background-position: center;
+}
+
+.cp-avatar.large {
+  width: 100px;
+  height: 100px;
+}
+
+.cp-avatar.medium {
+  width: 60px;
+  height: 60px;
+}
+
+/* profile update button */
+.profile-form .profile .profile-pic {
+  position: relative;
+}
+
+.profile-form .profile .upload-button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: var(--button-inactive-background);
+  cursor: pointer;

@@ -5,6 +5,11 @@ from . models import *
 import datetime
 import base64
 from eightfortypy.models import * 
+import pymysql
+
+# forms.py 
+from eightfortypy.forms import * 
+from django.urls import reverse,reverse_lazy
 # Create your views here.
 
 def index(request):
@@ -17,7 +22,31 @@ class MusicList(ListView):
     context_object_name = "song"
     paginate_by = 20
 
-import pymysql
+
+# 프로필 
+class ProfileVeiw(DetailView):
+    model = User 
+    template_name = "main/profile.html"
+    pk_url_kwarg = "user_id"
+    
+    context_object_name = "profile_user"
+    
+# 프로필 변경 
+
+class ProfileUpdateView(UpdateView):
+    model = User 
+    form_class = ProfileForm 
+    template_name = "main/profile_update_form.html"
+    
+    raise_exception = True # 접근자 제한 
+    redirect_unauthenticated_users = False # 접근자 제한  
+    
+    def get_object(self,query=None):
+        return self.request.user 
+    
+    def get_success_url(self):
+        return reverse("profile",kwargs=({"user_id":self.request.user.id}))
+
 
 #MySQL 서버에 연결
 # connection = pymysql.connect(
