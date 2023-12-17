@@ -851,6 +851,10 @@ header .gnb li {
   position: relative;
 }
 
+.profile-form .profile input[type="file"] {
+  display: none;
+}
+
 .profile-form .profile .upload-button {
   position: absolute;
   right: 0;
