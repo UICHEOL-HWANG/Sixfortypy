@@ -9,20 +9,54 @@
 <section>
     <div class="container">
         <div class="top_box">
-            <div class="input-group mb-3">
+            <div class="search_box">
+                <form action="">
+                    <!-- 검색종류 -->
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">Search</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Artist</a></li>
+                        <li><a class="dropdown-item" href="#">Track</a></li>
+                        <li><a class="dropdown-item" href="#">Genre</a></li>
+                    </ul>
+                    <!-- 검색창 -->
+                    <input type="search" placeholder="검색어를 입력하세요">
+                    <!-- 검색버튼 -->
+                    <button type="submit" class="btn btn-secondary"style="
+                    border-radius: 0 5px 5px 0">
+                        <span class="hide">검색버튼</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
+                            </path>
+                        </svg>
+                    </button>
+                </form>
+                <!-- <div class="search">
+                    <button type="button">
+                        <span class="hide">카테고리버튼</span>
+                    </button>
+                    <input type="text" placeholder="검색어를 입력해주세요.">
+                    <button>
+                        <span class="hide">검색아이콘</span>
+                    </button>
+                </div> -->
+            </div>
+            <!-- <div class="input-group mb-3">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">Search</button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Artist</a></li>
                     <li><a class="dropdown-item" href="#">Track</a></li>
                     <li><a class="dropdown-item" href="#">Genre</a></li>
-                    <!-- <li>
+                    <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
                 </ul>
                 <input type="text" class="form-control" aria-label="Text input with dropdown button">
-            </div>
+            </div> -->
             <h2>Sixfortypy <br>
                 Recommend
             </h2>
