@@ -1,0 +1,67 @@
+{% extends 'base/base_with_navbar.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <!-- 메인 -->
+    <section>
+        <div class="container">
+            <div class="playlist">
+                <div class="play">
+                    <div class="play_info">
+                        <table class="table table-dark">
+                            <thead>
+                              <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">앨범</th>
+                                <th scope="col">발매일</th>
+                                <th scope="col">좋아요</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for song in songs %}
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>
+                                    <img src="{% static 'images/cast02.jpg' %}" alt="앨범">
+                                    <h3>{{ song.album.artist }}</h3>
+                                    <p>가수</p>
+                                </td>
+                                <td>
+                                    <h3>{{ song.album.title }}</h3>
+                                    <p>장르</p>
+                                </td>
+                                <td>{{ song.album.release_date }}</td>
+                                <td>{{ song.popularity }}</td>
+                              </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+
+                </div>
+                
+
+            </div>
+            <!-- 페이지네이션 -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+    </section>
+
+{% endblock content %}
