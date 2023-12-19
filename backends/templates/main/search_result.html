@@ -10,6 +10,7 @@
             <div class="playlist">
                 <div class="play">
                     <div class="play_info">
+                      {% if song %}
                         <table class="table table-dark">
                             <thead>
                               <tr>
@@ -21,23 +22,24 @@
                               </tr>
                             </thead>
                             <tbody>
-                                {% for song in songs %}
                               <tr>
                                 <th scope="row">1</th>
                                 <td>
-                                    <img src="{% static 'images/cast02.jpg' %}" alt="앨범">
-                                    <h3>{{ song.album.artist }}</h3>
-                                    <p>가수</p>
+                                    <img src="{{ song.album.image }}" alt="{{ song.album.title}}">
+                                    <h3>{{ song.title }}</h3>
+                                    <p>{{ song.album.artist.name }}</p>
                                 </td>
                                 <td>
                                     <h3>{{ song.album.title }}</h3>
-                                    <p>장르</p>
+                                    <p>{{ artist.genres }}</p>
                                 </td>
                                 <td>{{ song.album.release_date }}</td>
                                 <td>{{ song.popularity }}</td>
                               </tr>
                             </tbody>
-                            {% endfor %}
+                            {% else %}
+                            <p> 검색결과가 없습니다</p>
+                            {% endif %}
                         </table>
 
                 </div>

@@ -52,52 +52,45 @@ class ProfileUpdateView(UpdateView):
         return reverse("profile",kwargs=({"user_id":self.request.user.id}))
 
 # 음악 검색 
-def search_and_save_track(request):
-    if request.method == 'POST':
-        query = request.POST.get('query')
-        
-        # 데이터베이스에서 음악 검색
-        songs = Song.objects.filter(title__icontains=query)
-        
-        if not songs:
-            # 데이터베이스에 음악이 없으면 Spotify API에서 검색 및 저장
-            api = UseApi(client_id_spotify, client_pw_spotify)
-            track_data = api.search_track(query)
+def search_track(request):
+    context = {}
+    if request.method == "POST":
+        track_name = request.POST.get('query')
+        api = UseApi(client_id_spotify,client_pw_spotify)  # Spotify API 인스턴스 생성
+        album_data, artist_data, song_data = api.search_track(track_name)
 
-            if track_data:
-                
-                # Artist 모델 생성
-                artist_name = track_data["album"]["artists"][1]["name"]
-                artist_id = track_data["album"]["artists"][0]["id"]
-                artist, created = Artist.objects.get_or_create(
-                    id=artist_id,
-                    defaults={
-                        "name": artist_name,
-                    }
-                )
+        # 아티스트 정보 확인 및 저장
+        artist, created = Artist.objects.get_or_create(id=artist_data['artist_id'], defaults={
+            'name': artist_data['artist_name'],
+            'image': artist_data['artist_image'],
+            'genres': artist_data['artist_genres'],
+            'popularity': artist_data['artist_popularity']
+        })
 
-                # Album 모델 생성
-                album_id = track_data["album"]["id"]
-                album, created = Album.objects.get_or_create(
-                    id=album_id,
-                    defaults={
-                        "title": track_data["album"]["name"],
-                        "release_date": datetime.strptime(track_data['album']['release_date'], '%Y-%m-%d'),
-                        "artist": artist
-                    }
-                )
+        # 앨범 정보 확인 및 저장
+        album, created = Album.objects.get_or_create(id=album_data['album_id'], defaults={
+            'title': album_data['album_name'],
+            'artist': artist,
+            'release_date': album_data['release_data'],
+            'image': album_data['album_image']
+        })
 
-                # Song 모델 생성
-                song_id = track_data['id']
-                Song.objects.get_or_create(
-                    id=song_id,
-                    defaults={
-                        "album": album,
-                        "title": track_data['name'],
-                        "popularity": track_data['popularity'],
-                        "link": track_data['external_urls']['spotify']
-                    }
-                ),
-                songs = Song.objects.filter(album=album)
-    return render(request, 'main/search_result.html', {'songs': songs})
+        # 곡 정보 확인 및 저장
+        song, created = Song.objects.get_or_create(id=song_data['track_id'], defaults={
+            'title': song_data['track_name'],
+            'album': album,
+            'popularity': song_data['track_popularity'],
+            'link': song_data['track_link']
+        })
+
+        # 검색 결과를 context에 추가
+        context = {
+            'artist': artist,
+            'album': album,
+            'song': song,
+            'created': created
+        }
+
+    # 검색 결과와 함께 템플릿 렌더링
+    return render(request, 'main/search_result.html', context)
     
