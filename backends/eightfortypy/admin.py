@@ -1,4 +1,8 @@
 from django.contrib import admin
+<<<<<<< HEAD
+
+# Register your models here.
+=======
 from .models import * 
 from django.contrib.auth.admin import UserAdmin
 
@@ -25,3 +29,4 @@ class SongAdmin(admin.ModelAdmin):
 admin.site.register(Artist, ArtistAdmin)
 admin.site.register(Album, AlbumAdmin)
 admin.site.register(Song, SongAdmin)
+>>>>>>> d717f5d4ffb90cfb12c5bd52259361ce19ef6e18

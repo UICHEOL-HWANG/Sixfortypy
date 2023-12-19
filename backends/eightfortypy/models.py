@@ -1,4 +1,19 @@
 from django.db import models
+<<<<<<< HEAD
+
+# Create your models here.
+class Music(models.Model):
+    Album = models.CharField(max_length=30)
+    Title = models.CharField(max_length=30)
+    Genre = models.CharField(max_length=30)
+    Release_Date = models.DateField()
+    Album_Image = models.ImageField(upload_to='Album_pics',blank=True)
+    Artist = models.CharField(max_length=15)
+    Poplularity = models.IntegerField()
+    Artist_Image = models.ImageField(upload_to='Artist_pics',blank=True)
+    Artist_Id = models.CharField(max_length=30)
+    Track_Id = models.CharField(max_length=30)
+=======
 from django.contrib.auth.models import AbstractUser # 회원가입 모델 
 from django.contrib.auth.models import User
 
@@ -48,3 +63,4 @@ class Song(models.Model):
     link = models.CharField(max_length=100)
     def __str__(self):
         return self.title
+>>>>>>> d717f5d4ffb90cfb12c5bd52259361ce19ef6e18

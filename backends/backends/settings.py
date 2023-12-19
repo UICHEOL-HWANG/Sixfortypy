@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
+]
+
+=======
     'eightfortypy',
     
     # allauth 회원가입 가능 
@@ -54,6 +58,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1 
 
+>>>>>>> d717f5d4ffb90cfb12c5bd52259361ce19ef6e18
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,8 +67,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+<<<<<<< HEAD
+=======
     'allauth.account.middleware.AccountMiddleware',
     
+>>>>>>> d717f5d4ffb90cfb12c5bd52259361ce19ef6e18
 ]
 
 ROOT_URLCONF = 'backends.urls'
@@ -165,6 +173,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "upload")
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< HEAD
+=======
 
 # allauth에 필요한 요소들 모두 넣어줄 예정 
 
@@ -221,3 +231,4 @@ PASSWORD_RESET_TIMEOUT_DAYS = 3 # 비밀번호 찾기 유효시간
 # admin창에서 보면 로그인 로그아웃 내역들이 엄청 쌓이는걸 방지시켜줌
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "" """ 로그인을 할 때마다 인증내역을 admin으로 보내지는걸 없애려고 '' 공백처리 """
 
+>>>>>>> d717f5d4ffb90cfb12c5bd52259361ce19ef6e18
