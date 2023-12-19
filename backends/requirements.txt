@@ -1,5 +1,6 @@
 asgiref==3.7.2
 backports.zoneinfo==0.2.1
+<<<<<<< HEAD
 cffi==1.16.0
 cryptography==41.0.7
 Django==4.2.8
@@ -8,3 +9,25 @@ PyMySQL==1.1.0
 sqlparse==0.4.4
 typing_extensions==4.8.0
 tzdata==2023.3
+=======
+certifi==2023.11.17
+cffi==1.16.0
+charset-normalizer==3.3.2
+cryptography==41.0.7
+defusedxml==0.7.1
+Django==4.2.8
+django-allauth==0.59.0
+django-widget-tweaks==1.5.0
+idna==3.6
+oauthlib==3.2.2
+pycparser==2.21
+PyJWT==2.8.0
+PyMySQL==1.1.0
+python3-openid==3.2.0
+requests==2.31.0
+requests-oauthlib==1.3.1
+sqlparse==0.4.4
+typing_extensions==4.8.0
+tzdata==2023.3
+urllib3==2.1.0
+>>>>>>> d717f5d4ffb90cfb12c5bd52259361ce19ef6e18

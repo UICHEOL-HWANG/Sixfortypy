@@ -265,4 +265,10 @@ pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,django
 
+<<<<<<< HEAD
 venv.bat
+=======
+venv.bat
+
+**/migrations/
+>>>>>>> d717f5d4ffb90cfb12c5bd52259361ce19ef6e18
