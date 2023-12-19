@@ -44,3 +44,14 @@ class UseApi:
         self.artist_data = dict(artist_id = self.track_data["artist_info"]["id"], artist_name = self.track_data["artist_info"]["name"], artist_popularity = self.track_data["artist_info"]["popularity"], artist_genres = ",".join(self.track_data["artist_info"]), artist_image = self.track_data["artist_info"]["images"][0]["url"], artist_link = self.track_data["artist_info"]["external_urls"])
         self.song_data = dict(track_id = self.track_data["id"], track_name = self.track_data["name"], track_popularity = self.track_data["popularity"], track_image = self.track_data["album"]["images"][0]["url"], track_link= self.track_data["external_urls"])
         return self.album_data, self.artist_data, self.song_data
+
+    def search_artist(self, artist_name):
+        search_endpoint = f'https://api.spotify.com/v1/search?q={artist_name}&type=artist'
+        search_response = requests.get(search_endpoint, headers=self.headers)
+        search_data = search_response.json()
+        artist_id = search_data['artists']['items'][0]['id']  # Get artist ID from the first search result
+        # Fetch artist data from Spotify API using artist ID
+        artist_endpoint = f'https://api.spotify.com/v1/artists/{artist_id}'
+        artist_response = requests.get(artist_endpoint, headers=self.headers)
+        self.artist_data = artist_response.json()
+        return self.artist_data
