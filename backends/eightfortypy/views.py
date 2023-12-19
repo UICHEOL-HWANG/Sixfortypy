@@ -5,9 +5,13 @@ from . models import *
 import datetime
 import base64
 from eightfortypy.models import * 
+from datetime import datetime
 import pymysql
 import requests
 
+# api 모듈 
+from . use_api import * 
+from . api_key import * 
 # forms.py 
 from eightfortypy.forms import * 
 from django.urls import reverse,reverse_lazy

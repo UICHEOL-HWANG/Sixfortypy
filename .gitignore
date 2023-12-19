@@ -268,3 +268,5 @@ pyrightconfig.json
 venv.bat
 
 **/migrations/
+
+/backends/eightfortypy/api_key.py 
