@@ -12,4 +12,7 @@ urlpatterns = [
     # 프로필 수정 
     path('edit-profile/',views.ProfileUpdateView.as_view(),name="profile-update"),
     
+    # 검색결과 
+    path('search/', views.search_and_save_track, name='search_and_save_track'),
+    
 ]
