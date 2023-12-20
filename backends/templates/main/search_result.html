@@ -3,65 +3,117 @@
 {% load static %}
 
 {% block content %}
+<!-- 메인 -->
+<section>
+    <div class="container">
+        <div class="select_play">
+            <div class="thumb">
+                <img src="{{ song.album.image }}" alt="{{ song.album.title}}">
 
-    <!-- 메인 -->
-    <section>
-        <div class="container">
-            <div class="playlist">
-                <div class="play">
-                    <div class="play_info">
-                        <table class="table table-dark">
-                            <thead>
-                              <tr>
+            </div>
+            <div class="thumb_info">
+                {% if song %}
+                <div class="song_name">
+                    {{ song.title }}
+                </div>
+                <div class="artist">
+                    {{ song.album.artist.name }}
+                </div>
+                <div class="song_info">
+                    <dl>
+                        <dt>
+                            발매일
+                        </dt>
+                        <dd>
+                            {{ song.album.release_date }}
+                        </dd>
+                        <dt>
+                            장르
+                        </dt>
+                        <dd>
+                            {{ artist.genres }}
+                        </dd>
+                        <dt>
+                            앨범명
+                        </dt>
+                        <dd>
+                            {{ song.album.title }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p> 검색결과가 없습니다</p>
+        {% endif %}
+
+        <div class="playlist">
+            <div class="play">
+                <div class="play_info">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">제목</th>
                                 <th scope="col">앨범</th>
                                 <th scope="col">발매일</th>
                                 <th scope="col">좋아요</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                {% for song in songs %}
-                              <tr>
-                                <th scope="row">1</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for song in album_songs %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
                                 <td>
-                                    <img src="{% static 'images/cast02.jpg' %}" alt="앨범">
-                                    <h3>{{ song.album.artist }}</h3>
-                                    <p>가수</p>
+                                    <img src="{{ song.album.image }}" alt="{{ song.album.title }}">
+                                    <h3>{{ song.title }}</h3>
+                                    <p>{{ song.artist.name }}</p>
                                 </td>
                                 <td>
                                     <h3>{{ song.album.title }}</h3>
-                                    <p>장르</p>
+                                    <p>{{ song.album.genres }}</p>
                                 </td>
                                 <td>{{ song.album.release_date }}</td>
                                 <td>{{ song.popularity }}</td>
-                              </tr>
-                            </tbody>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5">해당 앨범의 곡이 없습니다.</td>
+                            </tr>
                             {% endfor %}
-                        </table>
-
+                        </tbody>
+                    </table>
                 </div>
-                
-
             </div>
-            <!-- 페이지네이션 -->
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-    </section>
 
+
+        </div>
+        <!-- 페이지네이션 -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+        
+                {% for num in page_obj.paginator.page_range %}
+                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+        
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</section>
 {% endblock content %}
