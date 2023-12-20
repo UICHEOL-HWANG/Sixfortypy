@@ -426,6 +426,11 @@ header .gnb li {
   vertical-align: middle;
   line-height: 2;
 }
+
+.playlist .play .play_info .table{
+  text-align: center;
+}
+
 .playlist .play .play_info table td img{
   width: 70px;
   float: left;
@@ -433,9 +438,15 @@ header .gnb li {
   border-radius: 10px;
 }
 
+.playlist .play .play_info table td{
+  vertical-align: middle;
+}
+
 .playlist .play .play_info table td h3{
   display: block;
+  margin-top: 10px;
 }
+
 .playlist .play .play_info table td p{
   display: inline-block;
   opacity: .6;
