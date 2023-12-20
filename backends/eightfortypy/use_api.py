@@ -34,18 +34,21 @@ class UseApi:
         top_tracks = self.get_top_tracks(artist_data['id'])
         self.track_data['related_artists'] = related_artists
         self.track_data['top_tracks'] = top_tracks
+        self.track_data['artist_info'] = artist_data  # Adding artist info to track_data
         each_track = []
         related_artist = []
         for track in top_tracks:
             track_id = track["id"]
             album_id = track["album"]["id"]
             album_name = track["album"]["name"]
+            release_date = track["album"]["release_date"]
+            artist_id = self.track_data["artist_info"]["id"]
             name = track["name"]
             artist_name = track["artists"][0]["name"]
             image = track["album"]["images"][0]["url"]
             popularity = track["popularity"]
             link = track["external_urls"]["spotify"]
-            each_track.append(dict(track_id = track_id, album_id = album_id, album_name = album_name, track_name = name, artist_name = artist_name, popularity = popularity, image = image, link = link))
+            each_track.append(dict(track_id = track_id, album_id = album_id, artist_id = artist_id , album_name = album_name, release_date = release_date, track_name = name, artist_name = artist_name, popularity = popularity, image = image, link = link))
         for track in related_artists:
             artist_id = track["id"]
             artist_name = track["name"]
@@ -55,9 +58,8 @@ class UseApi:
             link = track["external_urls"]["spotify"]
             related_artist.append(dict(artist_id = artist_id, artist_name = artist_name, genres = genres, popularity = popularity, image = image, link = link))
             
-        self.track_data['artist_info'] = artist_data  # Adding artist info to track_data
-        self.album_data = dict(album_id = self.track_data["album"]["id"], album_name = self.track_data["album"]["name"], release_data = self.track_data["album"]["release_date"], album_image = self.track_data["album"]["images"][0]["url"], album_link = self.track_data["album"]["external_urls"]["spotify"])
-        self.artist_data = dict(artist_id = self.track_data["artist_info"]["id"], artist_name = self.track_data["artist_info"]["name"], artist_popularity = self.track_data["artist_info"]["popularity"], artist_genres = ", ".join(self.track_data["artist_info"]["genres"]), artist_image = self.track_data["artist_info"]["images"][0]["url"], artist_link = self.track_data["artist_info"]["external_urls"]["spotify"])
+        self.album_data = dict(album_id = self.track_data["album"]["id"], album_name = self.track_data["album"]["name"], release_date = self.track_data["album"]["release_date"], album_image = self.track_data["album"]["images"][0]["url"], album_link = self.track_data["album"]["external_urls"]["spotify"])
+        self.artist_data = dict(artist_id = self.track_data["artist_info"]["id"], artist_name = self.track_data["artist_info"]["name"], artist_popularity = self.track_data["artist_info"]["popularity"], genres = ", ".join(self.track_data["artist_info"]["genres"]), artist_image = self.track_data["artist_info"]["images"][0]["url"], artist_link = self.track_data["artist_info"]["external_urls"]["spotify"])
         self.song_data = dict(track_id = self.track_data["id"], track_name = self.track_data["name"], track_popularity = self.track_data["popularity"], track_image = self.track_data["album"]["images"][0]["url"], track_link= self.track_data["external_urls"]["spotify"])
         return self.album_data, self.artist_data, self.song_data, each_track, related_artist
     
