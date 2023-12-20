@@ -86,8 +86,3 @@ class UseApi:
         top_tracks_response = requests.get(top_tracks_endpoint, headers=self.headers)
         top_tracks_data = top_tracks_response.json()
         return top_tracks_data['tracks'] if 'tracks' in top_tracks_data else []
-        
-
-
-
-

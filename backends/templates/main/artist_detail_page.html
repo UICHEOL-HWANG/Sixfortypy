@@ -1,0 +1,113 @@
+{% extends 'base/base_with_navbar.html' %}
+
+{% load static %}
+
+{% block content %}
+<!-- 메인 -->
+<section>
+    <div class="container">
+        <div class="select_play">
+            <div class="thumb">
+                <img src="{{ artist.image }}" alt="{{ artist.name}}">
+            </div>
+            <div class="thumb_info">
+                <div class="song_name">
+                    {{ artist.name }}
+                </div>
+                <div class="artist">
+                    {{ song.album.artist.name }}
+                </div>
+                <div class="song_info">
+                    <dl>
+                        <dt>
+                            발매일
+                        </dt>
+                        <dd>
+                            {{ song.album.release_date }}
+                        </dd>
+                        <dt>
+                            장르
+                        </dt>
+asd
+                        <dd>
+asd
+                        </dd>
+                        <dt>
+                            앨범명
+                        </dt>
+                        <dd>
+asd
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="playlist">
+            <div class="play">
+                <div class="play_info">
+                    <strong>가수 곡 종류</strong>
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">앨범</th>
+                                <th scope="col">발매일</th>
+                                <th scope="col">인기도</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for song in songs %}
+                            <tr>
+                                <th scope="row"></th>
+                                <td>
+                                    <img src="{{ song.album.image }}" alt="{{ song.album.title }}">
+                                    <h3>{{ song.title }}</h3>
+                                    <p>{{ song.artist.name }}</p>
+                                </td>
+                                <td>
+                                    <h3>{{ song.album.title }}</h3>
+                                    <p>{{ song.album.artist.genres }}</p>
+                                </td>
+                                <td>{{ song.album.release_date }}</td>
+                                <td>{{ song.popularity }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- 페이지네이션 -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</section>
+{% endblock content %}
