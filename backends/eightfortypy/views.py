@@ -9,6 +9,7 @@ from datetime import datetime
 
 # 페이지네이션
 from django.core.paginator import Paginator
+import requests
 
 # api 모듈 
 from . use_api import * 
