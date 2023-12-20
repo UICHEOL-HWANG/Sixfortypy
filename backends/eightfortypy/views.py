@@ -3,28 +3,33 @@ from django.views.generic import *
 from django.db import models
 from . models import * 
 import datetime
-import base64
+
 from eightfortypy.models import * 
 from datetime import datetime
-import pymysql
+
+# 페이지네이션
+from django.core.paginator import Paginator
 
 # api 모듈 
 from . use_api import * 
 from . api_key import * 
+import base64
+
 # forms.py 
 from eightfortypy.forms import * 
 from django.urls import reverse,reverse_lazy
-# Create your views here.
+
 
 def index(request):
-    return render(request,"main/index.html")
+    songs = Song.objects.all()  # 모든 Song 객체를 쿼리
+    return render(request, "main/index.html", {'songs': songs})
 
 
 class MusicList(ListView):
     model = Song 
     template_name = 'main/list_page.html'
     context_object_name = "song"
-    paginate_by = 20
+    paginate_by = 10
 
 
 # 프로필 
@@ -80,14 +85,21 @@ def search_track(request):
             'title': song_data['track_name'],
             'album': album,
             'popularity': song_data['track_popularity'],
-            'link': song_data['track_link']
+            'link': song_data['track_link']['spotify']
         })
 
+        album_songs = Song.objects.filter(album=album).order_by('title')
+        
+        paginator = Paginator(album_songs, 10)  # 여기서 10은 한 페이지에 표시할 항목 수
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        
         # 검색 결과를 context에 추가
         context = {
             'artist': artist,
             'album': album,
             'song': song,
+            'album_songs': album_songs,
             'created': created
         }
 

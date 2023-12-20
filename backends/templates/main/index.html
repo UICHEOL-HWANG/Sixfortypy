@@ -14,7 +14,7 @@
                     <!-- 검색종류 -->
                     {% csrf_token %}
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">Search</button>
+                        aria-expanded="false">Search</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Artist</a></li>
                         <li><a class="dropdown-item" href="#">Track</a></li>
@@ -23,12 +23,12 @@
                     <!-- 검색창 -->
                     <input type="search" name="query" placeholder="검색어를 입력하세요">
                     <!-- 검색버튼 -->
-                    
-                    <button type="submit" class="btn btn-secondary"style="
+
+                    <button type="submit" class="btn btn-secondary" style="
                     border-radius: 0 5px 5px 0">
                         <span class="hide">검색버튼</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
-                            viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
                             <path
                                 d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z">
                             </path>
@@ -73,54 +73,17 @@
                     Sixtyfortypy PlayList
                 </div>
                 <div class="post-wrapper">
+                    {% for song in songs %}
                     <div class="post">
-                        <div class="slider-image">노래이미지
-                            <img src="{% static 'images/cast02.jpg' %}" alt="노래1">
+                        <div class="slider-image">
+                            {% if song.album.image %}
+                            <img src="{{ song.album.image }}" alt="{{ song.album.title }}">
+                            {% else %}
+                            <img src="{% static 'images/empty-cover.jpg' %}" alt="empty-cover">
+                            {% endif %}
                         </div>
-                        <div class="post-info">노래설명</div>
                     </div>
-                    <div class="post">
-                        <div class="slider-image">노래이미지
-                            <img src="{% static 'images/cast03.jpg' %}" alt="노래1">
-                        </div>
-                        <div class="post-info">노래설명</div>
-                    </div>
-                    <div class="post">
-                        <div class="slider-image">노래이미지
-                            <img src="{% static 'images/cast02.jpg' %}" alt="노래1">
-                        </div>
-                        <div class="post-info">노래설명</div>
-                    </div>
-                    <div class="post">
-                        <div class="slider-image">노래이미지
-                            <img src="{% static 'images/cast03.jpg' %}" alt="노래1">
-                        </div>
-                        <div class="post-info">노래설명</div>
-                    </div>
-                    <div class="post">
-                        <div class="slider-image">노래이미지
-                            <img src="{% static 'images/cast02.jpg' %}" alt="노래1">
-                        </div>
-                        <div class="post-info">노래설명</div>
-                    </div>
-                    <div class="post">
-                        <div class="slider-image">노래이미지
-                            <img src="{% static 'images/cast03.jpg' %}" alt="노래1">
-                        </div>
-                        <div class="post-info">노래설명</div>
-                    </div>
-                    <div class="post">
-                        <div class="slider-image">노래이미지
-                            <img src="{% static 'images/cast02.jpg' %}" alt="노래1">
-                        </div>
-                        <div class="post-info">노래설명</div>
-                    </div>
-                    <div class="post">
-                        <div class="slider-image">노래이미지
-                            <img src="{% static 'images/cast03.jpg' %}" alt="노래1">
-                        </div>
-                        <div class="post-info">노래설명</div>
-                    </div>
+                    {% endfor %}
                 </div>
                 <button class="prev">&lt;</button>
                 <button class="next">&gt;</button>
