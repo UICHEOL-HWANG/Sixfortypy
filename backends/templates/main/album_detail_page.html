@@ -3,21 +3,20 @@
 {% load static %}
 
 {% block content %}
-<!-- 메인 -->
-<section>
+  <!-- 메인 -->
+  <section>
     <div class="container">
         <div class="select_play">
             <div class="thumb">
-                <img src="{{ song.album.image }}" alt="{{ song.album.title}}">
+                <img src="{{ album.image }}" alt="{{ album.title}}">
 
             </div>
             <div class="thumb_info">
-                {% if song %}
                 <div class="song_name">
-                    {{ song.title }}
+                    {{ album.title }}
                 </div>
                 <div class="artist">
-                    {{ song.album.artist.name }}
+                    {{ album.artist.name }}
                 </div>
                 <div class="song_info">
                     <dl>
@@ -25,14 +24,14 @@
                             발매일
                         </dt>
                         <dd>
-                            {{ song.album.release_date }}
+                            {{ album.release_date }}
                         </dd>
                         <dt>
                             장르
                         </dt>
                         {% if artist.genres %}
                         <dd>
-                            {{ artist.genres }}
+                            {{ album.artist.genres }}
                         </dd>
                         {% else %}
                         <dd> None</dd>
@@ -47,9 +46,6 @@
                 </div>
             </div>
         </div>
-        {% else %}
-        <p> 검색결과가 없습니다</p>
-        {% endif %}
 
         <div class="playlist">
             <div class="play">
@@ -65,7 +61,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for song in album_songs %}
+                            {% for song in songs %}
                             <tr>
                                 <th scope="row">{{ forloop.counter }}</th>
                                 <td>
@@ -102,29 +98,6 @@
                                 <th scope="col">인기도</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {% for each_song in each_track %}
-                            <tr>
-                                <th scope="row">{{ forloop.counter }}</th>
-                                <td>
-                                    <img src="{{ each_song.image }}" alt="{{ song.album.title }}">
-                                    <h3>{{ each_song.track_name }}</h3>
-                                    <p>{{ each_song.track_name }}</p>
-                                </td>
-                                <td>
-                                    <h3>{{ each_song.album_name }}</h3>
-                                    <p>{{ song.album.genres }}</p>
-                                </td>
-                                <td>{{ song.album.release_date }}</td>
-                                <td>{{ each_song.popularity }}</td>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td colspan="5">해당 앨범의 곡이 없습니다.</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
                 </div>
             </div>
 

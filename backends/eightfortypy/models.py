@@ -37,7 +37,7 @@ class Artist(models.Model):
 class Album(models.Model):
     title = models.CharField(max_length=100)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='albums')
-    release_date = models.DateField()
+    release_date = models.DateField(null=True, blank=True)
     id = models.CharField(max_length=100,primary_key=True)
     image = models.ImageField(upload_to='album_pics', blank=True)
     def __str__(self):
