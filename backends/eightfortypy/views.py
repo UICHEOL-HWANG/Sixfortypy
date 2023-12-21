@@ -74,6 +74,10 @@ class MusicDetailView(DetailView):
         song = self.object  # 현재 곡 객체
         context['album'] = song.album  # 연결된 앨범
         context['artist'] = song.album.artist  # 연결된 아티스트
+        
+        # 해당 곡과 관련한 앨범 내 곡들을 더 추가하기 위한 로직 
+        artist_id = song.album.artist.id
+        context['other_songs'] = Song.objects.filter(album__artist__id=artist_id).exclude(id=song.id)
         return context
 
 # 앨범 디테일 페이지 
@@ -88,6 +92,7 @@ class AlbumDetailView(DetailView):
         album = self.object  # 현재 앨범 객체
         context['songs'] = Song.objects.filter(album=album)  # 현재 앨범과 연결된 곡들
         context['artist'] = album.artist  # 현재 앨범과 연결된 아티스트
+        
         return context
 
 class ArtistDetailView(DetailView):
@@ -100,6 +105,11 @@ class ArtistDetailView(DetailView):
         artist_id = self.kwargs.get('artist_id')
         # Song 모델에서 아티스트를 찾을 때 album을 통해 접근
         context['songs'] = Song.objects.filter(album__artist__id=artist_id)
+        
+        # 고유한 앨범 목록 추가
+        unique_albums = Album.objects.filter(artist__id=artist_id).distinct()
+        context['unique_albums'] = unique_albums
+
         return context
 
     

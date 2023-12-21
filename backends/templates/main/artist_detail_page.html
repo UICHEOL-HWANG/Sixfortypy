@@ -20,23 +20,16 @@
                 <div class="song_info">
                     <dl>
                         <dt>
-                            발매일
+                            인기도
                         </dt>
                         <dd>
-                            {{ song.album.release_date }}
+                            {{ artist.popularity }}
                         </dd>
                         <dt>
                             장르
                         </dt>
-asd
                         <dd>
-asd
-                        </dd>
-                        <dt>
-                            앨범명
-                        </dt>
-                        <dd>
-asd
+                            {{ artist.genres }}
                         </dd>
                     </dl>
                 </div>
@@ -47,7 +40,7 @@ asd
         <div class="playlist">
             <div class="play">
                 <div class="play_info">
-                    <strong>가수 곡 종류</strong>
+                    <div class="info_detail"><strong>해당 아티스트의 다른 곡</strong></div>
                     <table class="table table-dark">
                         <thead>
                             <tr>
@@ -61,11 +54,11 @@ asd
                         <tbody>
                             {% for song in songs %}
                             <tr>
-                                <th scope="row"></th>
+                                <th scope="row">{{ forloop.counter }}</th>
                                 <td>
-                                    <img src="{{ song.album.image }}" alt="{{ song.album.title }}">
-                                    <h3>{{ song.title }}</h3>
-                                    <p>{{ song.artist.name }}</p>
+                                    <a href="{% url 'album_detail' song.album.pk %}"><img src="{{ song.album.image }}" alt="{{ song.album.title }}"></a>
+                                    <h3><a href="{% url 'music_detail' song.pk %}">{{ song.title }}</a></h3>
+                                    <p>{{ artist.name }}</p>
                                 </td>
                                 <td>
                                     <h3>{{ song.album.title }}</h3>
@@ -79,9 +72,33 @@ asd
                     </table>
                 </div>
             </div>
-
-
         </div>
+
+        <div class="playlist">
+            <div class="play">
+                <div class="play_info">
+                    <div class="info_detail"><strong>앨범목록</strong></div>
+                    <table class="table table-dark">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            {% for album in unique_albums %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'album_detail' album.pk %}"><img src="{{ album.image }}" alt="{{ album.title }}"></a>
+                                </td>
+                                <td>
+                                    <h3><a href="{% url 'album_detail' album.pk %}">{{ album.title }}</a></h3>
+                                </td>
+                                <td>{{ album.release_date }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
         <!-- 페이지네이션 -->
         <nav aria-label="Page navigation">
             <ul class="pagination">

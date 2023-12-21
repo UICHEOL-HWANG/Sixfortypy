@@ -900,3 +900,10 @@ header .gnb li {
   background-color: var(--button-inactive-background);
   cursor: pointer;
 }
+
+/* artist detail */
+
+.info_detail{
+  margin: 43px 10px;
+  font-size: 35px ;
+}

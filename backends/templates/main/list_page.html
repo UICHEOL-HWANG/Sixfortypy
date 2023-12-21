@@ -25,7 +25,7 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>
                   {% if song.album.image %}
-                    <img src="{{ song.album.image }}" alt="{{ song.album.title }}">
+                    <a href="{% url 'album_detail' album_id=song.album.id %}"><img src="{{ song.album.image }}" alt="{{ song.album.title }}"></a>
                   {% else %}
                   <img src="{% static 'images/empty-cover.jpg' %}" alt="empty-cover">
                   {% endif %}

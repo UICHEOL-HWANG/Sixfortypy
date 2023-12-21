@@ -16,7 +16,7 @@
                     {{ album.title }}
                 </div>
                 <div class="artist">
-                    {{ album.artist.name }}
+                    <a href="{% url 'artist_detail' album.artist.pk %}">{{ album.artist.name }}</a>
                 </div>
                 <div class="song_info">
                     <dl>
@@ -36,12 +36,7 @@
                         {% else %}
                         <dd> None</dd>
                         {% endif %}
-                        <dt>
-                            앨범명
-                        </dt>
-                        <dd>
-                            {{ song.album.title }}
-                        </dd>
+
                     </dl>
                 </div>
             </div>
@@ -50,6 +45,7 @@
         <div class="playlist">
             <div class="play">
                 <div class="play_info">
+                    <div class="info_detail"><strong>수록곡</strong></div>
                     <table class="table table-dark">
                         <thead>
                             <tr>
@@ -66,8 +62,8 @@
                                 <th scope="row">{{ forloop.counter }}</th>
                                 <td>
                                     <img src="{{ song.album.image }}" alt="{{ song.album.title }}">
-                                    <h3>{{ song.title }}</h3>
-                                    <p>{{ song.artist.name }}</p>
+                                    <h3><a href="{% url 'music_detail' song.pk %}">{{ song.title }}</a></h3>
+                                    <p><a href="{% url 'artist_detail' song.album.artist.pk %}">{{ artist.name }}</a></p>
                                 </td>
                                 <td>
                                     <h3>{{ song.album.title }}</h3>
