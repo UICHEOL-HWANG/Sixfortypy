@@ -77,9 +77,9 @@
                     <div class="post">
                         <div class="slider-image">
                             {% if song.album.image %}
-                            <img src="{{ song.album.image }}" alt="{{ song.album.title }}">
+                            <a href="{% url 'music_detail' song.pk %}"><img src="{{ song.album.image }}" alt="{{ song.album.title }}"></a>
                             {% else %}
-                            <img src="{% static 'images/empty-cover.jpg' %}" alt="empty-cover">
+                            <a href="{% url 'music_detail' song.pk %}"><img src="{% static 'images/empty-cover.jpg' %}" alt="empty-cover"></a>
                             {% endif %}
                         </div>
                     </div>

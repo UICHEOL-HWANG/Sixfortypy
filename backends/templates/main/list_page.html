@@ -16,25 +16,31 @@
                 <th scope="col">제목</th>
                 <th scope="col">앨범</th>
                 <th scope="col">발매일</th>
-                <th scope="col">좋아요</th>
+                <th scope="col">인기도</th>
               </tr>
             </thead>
-            {% for song in song %}
+            {% for song in songs %}
             <tbody>
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>
                   {% if song.album.image %}
-                  <img src="{{ song.album.image }}" alt="{{ song.album.title }}">
-                {% else %}
+                    <a href="{% url 'album_detail' album_id=song.album.id %}"><img src="{{ song.album.image }}" alt="{{ song.album.title }}"></a>
+                  {% else %}
                   <img src="{% static 'images/empty-cover.jpg' %}" alt="empty-cover">
-                {% endif %}
-                  <h3>{{ song.title }}</h3>
-                  <p>{{ song.artist.name }}</p>
+                  {% endif %}
+                  <a href="{% url 'music_detail' song.pk %}">
+                    <h3>{{ song.title }}</h3>
+                  </a>
+                  <a href="{% url 'artist_detail' artist_id=song.album.artist.id %}">
+                    <p>{{ song.album.artist.name }}</p>
+                  </a>
                 </td>
                 <td>
-                  <h3>{{ song.album.title }}</h3>
-                  <p>{{ song.album.genres }}</p>
+                  <a href="{% url 'album_detail' album_id=song.album.id %}">
+                    <h3>{{ song.album.title }}</h3>
+                  </a>
+                  <p>{{ song.album.artist.genres }}</p>
                 </td>
                 <td>{{ song.album.release_date }}</td>
                 <td>{{ song.popularity }}</td>
@@ -55,25 +61,25 @@
     <nav aria-label="Page navigation">
       <ul class="pagination">
         {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
         {% endif %}
-    
+
         {% for num in page_obj.paginator.page_range %}
-          <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-          </li>
+        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
         {% endfor %}
-    
+
         {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
         {% endif %}
       </ul>
     </nav>

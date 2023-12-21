@@ -3,21 +3,20 @@
 {% load static %}
 
 {% block content %}
-<!-- 메인 -->
-<section>
+  <!-- 메인 -->
+  <section>
     <div class="container">
         <div class="select_play">
             <div class="thumb">
-                <img src="{{ song.album.image }}" alt="{{ song.album.title}}">
+                <img src="{{ album.image }}" alt="{{ album.title}}">
 
             </div>
             <div class="thumb_info">
-                {% if song %}
                 <div class="song_name">
-                    {{ song.title }}
+                    {{ album.title }}
                 </div>
                 <div class="artist">
-                    {{ song.album.artist.name }}
+                    <a href="{% url 'artist_detail' album.artist.pk %}">{{ album.artist.name }}</a>
                 </div>
                 <div class="song_info">
                     <dl>
@@ -25,36 +24,28 @@
                             발매일
                         </dt>
                         <dd>
-                            {{ song.album.release_date }}
+                            {{ album.release_date }}
                         </dd>
                         <dt>
                             장르
                         </dt>
                         {% if artist.genres %}
                         <dd>
-                            {{ artist.genres }}
+                            {{ album.artist.genres }}
                         </dd>
                         {% else %}
                         <dd> None</dd>
                         {% endif %}
-                        <dt>
-                            앨범명
-                        </dt>
-                        <dd>
-                            {{ song.album.title }}
-                        </dd>
+
                     </dl>
                 </div>
             </div>
         </div>
-        {% else %}
-        <p> 검색결과가 없습니다</p>
-        {% endif %}
 
         <div class="playlist">
             <div class="play">
                 <div class="play_info">
-                    <div class="info_detail"><strong>해당 앨범 수록곡</strong></div>
+                    <div class="info_detail"><strong>수록곡</strong></div>
                     <table class="table table-dark">
                         <thead>
                             <tr>
@@ -66,13 +57,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for song in album_songs %}
+                            {% for song in songs %}
                             <tr>
                                 <th scope="row">{{ forloop.counter }}</th>
                                 <td>
                                     <img src="{{ song.album.image }}" alt="{{ song.album.title }}">
-                                    <h3>{{ song.title }}</h3>
-                                    <p>{{ song.artist.name }}</p>
+                                    <h3><a href="{% url 'music_detail' song.pk %}">{{ song.title }}</a></h3>
+                                    <p><a href="{% url 'artist_detail' song.album.artist.pk %}">{{ artist.name }}</a></p>
                                 </td>
                                 <td>
                                     <h3>{{ song.album.title }}</h3>
@@ -93,7 +84,6 @@
 
             <div class="play">
                 <div class="play_info">
-                    <div class="info_detail"><strong>해당 아티스트의 다른 곡</strong></div>
                     <table class="table table-dark">
                         <thead>
                             <tr>
@@ -104,33 +94,9 @@
                                 <th scope="col">인기도</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {% for each_song in each_track %}
-                            <tr>
-                                <th scope="row">{{ forloop.counter }}</th>
-                                <td>
-                                    <img src="{{ each_song.image }}" alt="{{ song.album.title }}">
-                                    <h3>{{ each_song.track_name }}</h3>
-                                    <p>{{ each_song.track_name }}</p>
-                                </td>
-                                <td>
-                                    <h3>{{ each_song.album_name }}</h3>
-                                    <p>{{ song.album.genres }}</p>
-                                </td>
-                                <td>{{ song.album.release_date }}</td>
-                                <td>{{ each_song.popularity }}</td>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td colspan="5">해당 앨범의 곡이 없습니다.</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
                 </div>
             </div>
 
-            <p>{{ related_artist }}</p>
         </div>
         <!-- 페이지네이션 -->
         <nav aria-label="Page navigation">
