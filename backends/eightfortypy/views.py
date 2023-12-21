@@ -20,6 +20,9 @@ import base64
 from eightfortypy.forms import * 
 from django.urls import reverse,reverse_lazy
 
+# 추천시스템을 위한 모듈 
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 def index(request):
     songs = Song.objects.all()  # 모든 Song 객체를 쿼리
@@ -93,6 +96,28 @@ class AlbumDetailView(DetailView):
         context['songs'] = Song.objects.filter(album=album)  # 현재 앨범과 연결된 곡들
         context['artist'] = album.artist  # 현재 앨범과 연결된 아티스트
         
+        # 코사인 유사도 
+        
+        # 모든 아티스트의 장르 데이터 가져오기
+        all_artists = Artist.objects.all()
+        genres = [artist.genres for artist in all_artists]  # 예시: 각 아티스트의 장르 사용
+
+        # TF-IDF 벡터화
+        vectorizer = TfidfVectorizer()
+        genre_matrix = vectorizer.fit_transform(genres)
+
+        # 현재 아티스트와 다른 아티스트들 간의 코사인 유사도 계산
+        cosine_similarities = cosine_similarity(genre_matrix, genre_matrix)
+        current_artist_index = list(all_artists).index(album.artist)
+        similarity_scores = list(enumerate(cosine_similarities[current_artist_index]))
+
+        # 유사도에 따라 아티스트 정렬 및 상위 N개 추출
+        similarity_scores = sorted(similarity_scores, key=lambda x: x[1], reverse=True)
+        recommended_artist_ids = [all_artists[i].id for i, score in similarity_scores[1:6]]  # 상위 5개, 현재 아티스트 제외
+
+        # 추천 아티스트
+        context['recommended_artists'] = Artist.objects.filter(id__in=recommended_artist_ids)
+
         return context
 
 class ArtistDetailView(DetailView):
