@@ -17,11 +17,12 @@
                 <li class="on">
                     <a href="{% url 'music-list' %}">음악목록</a>
                 </li>
+
+
+                {% if user.is_authenticated %}
                 <li>
                     <a href="{% url 'recommend' user.pk %}">추천</a>
                 </li>
-
-                {% if user.is_authenticated %}
                 <li><a href="{% url 'profile' user.id %}">내 프로필</a></li>
                 <li><a href="{% url 'account_logout' %}">로그아웃</a></li>
                 {% else %}

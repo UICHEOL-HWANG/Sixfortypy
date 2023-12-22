@@ -30,6 +30,7 @@ urlpatterns = [
     path('search/', views.search_track, name='search_and_save_track'),
     # 프로필 북마크 
     path('bookmark/song/',views.BookmarkSongView.as_view(), name='bookmark_song'),
-    
+    # 프로필 설정 
+    path('set-profile/',views.ProfileSetView.as_view(),name="profile-set"),
     
 ]

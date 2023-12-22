@@ -8,6 +8,9 @@ import datetime
 from eightfortypy.models import * 
 from datetime import datetime
 
+# 접근 제한자
+from eightfortypy.mixins import * 
+
 # 페이지네이션
 from django.core.paginator import Paginator
 import requests
@@ -32,6 +35,9 @@ from django.shortcuts import get_object_or_404
 
 # json return 
 from django.http import JsonResponse
+
+# 비밀번호 변경 
+from allauth.account.views import PasswordChangeView
 
 def index(request):
     songs = Song.objects.all()  # 모든 Song 객체를 쿼리
@@ -61,7 +67,7 @@ class MusicList(ListView):
 
 
 # 프로필 
-class ProfileView(DetailView):
+class ProfileView(LoginAndVerificationRequiredMixin,DetailView):
     model = User 
     template_name = "main/profile.html"
     pk_url_kwarg = "user_id"
@@ -82,7 +88,7 @@ class ProfileView(DetailView):
     
 # 프로필 변경 
 
-class RecommendedView(LoginRequiredMixin, DetailView):
+class RecommendedView(LoginAndOwnershipRequiredMixin,DetailView):
     model= User
     template_name = "main/recommended_system.html"
     pk_url_kwarg = "user_id"
@@ -135,7 +141,7 @@ class RecommendedView(LoginRequiredMixin, DetailView):
         return context
     
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(LoginAndVerificationRequiredMixin,UpdateView):
     model = User 
     form_class = ProfileForm 
     template_name = "main/profile_update_form.html"
@@ -343,3 +349,37 @@ def search_track(request):
 
     # 검색 결과와 함께 템플릿 렌더링
     return render(request, 'main/search_result.html', context)
+
+
+# 비정상 접근 막기 
+
+def custom_permission_denied(request, exception):
+    return render(request, 'account/403.html', status=403) # 비정상적인 접근을 막는 403 forbidden 커스텀 
+
+# 초기 프로필 설정 
+
+class ProfileSetView(LoginRequiredMixin,UpdateView):
+    model = User 
+    form_class = ProfileForm 
+    template_name = "main/profile_set_form.html"
+    
+    raise_exception = True # 접근자 제한 
+    redirect_unauthenticated_users = False # 접근자 제한  
+    
+    def get_object(self,query=None):
+        return self.request.user
+    
+    def get_success_url(self):
+        return reverse("index")
+
+
+# 비밀번호 변경 
+
+class CustomPasswordChangeView(LoginRequiredMixin,PasswordChangeView):
+    raise_exception = True # 접근자 제한 
+    redirect_unauthenticated_users = False # 접근자 제한  
+    # 오버라이딩 
+    # 상속된 속성에 내용을 덧붙여서 다르게 사용 
+    # 변경이 완료되면 리다이렉트 해주는 함수
+    def get_success_url(self): # 비밀번호 변경이 성공적으로 변경 되면~
+        return reverse('profile',kwargs={"user_id":self.request.user.id})

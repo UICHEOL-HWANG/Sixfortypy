@@ -63,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'eightfortypy.middleware.ProfileSetupMiddleware' #우리가 만든 미들웨어 
     
 ]
 
@@ -131,6 +132,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+    {
+        'NAME' : 'eightfortypy.validators.CustomPasswordValidator'
+     }, # Validators.py를 추가
 ]
 
 
@@ -221,3 +225,6 @@ PASSWORD_RESET_TIMEOUT_DAYS = 3 # 비밀번호 찾기 유효시간
 # admin창에서 보면 로그인 로그아웃 내역들이 엄청 쌓이는걸 방지시켜줌
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "" """ 로그인을 할 때마다 인증내역을 admin으로 보내지는걸 없애려고 '' 공백처리 """
 
+# 에러 핸들러 만들기 
+
+handler403 = 'eightfortypy.views.custom_permission_denied'

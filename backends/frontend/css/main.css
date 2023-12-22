@@ -836,25 +836,12 @@ header .gnb li {
   align-items: center;
 }
 
-.cp-avatar.large {
-  width: 100px;
-  height: 100px;
-}
 
 .profile-header .profile-pic {
   flex-shrink: 0;
   margin-right: 15px;
 }
 
-.cp-avatar {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: var(--avatar-placeholder);
-  background-size: cover;
-  background-position: center;
-}
 
 .content-list .header {
   display: flex;
@@ -925,7 +912,7 @@ header .gnb li {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: var(--avatar-placeholder);
+  background-color:  #e3e1dc;
   background-size: cover;
   background-position: center;
 }
@@ -1088,4 +1075,26 @@ header .gnb li {
 .playlist.animation{
 	-webkit-animation: bounce-in-top 3.5s both;
 	        animation: bounce-in-top 3.5s both;
+}
+
+.denied{
+  margin: 70px auto;
+  font-weight: 900;
+}
+
+.error-message{
+  color: white;
+}
+
+.welcome-message{
+  text-align: center;
+  color: white;
+}
+
+.profile-form .logo{
+  align-items: center;
+}
+
+.set-logo{
+  text-align: center;
 }
