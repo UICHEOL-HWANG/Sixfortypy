@@ -8,6 +8,9 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static 
 from eightfortypy.views import CustomPasswordChangeView
+from django.conf.urls import handler403
+from eightfortypy.views import custom_permission_denied
+
 
 
 urlpatterns = [
