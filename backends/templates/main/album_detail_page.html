@@ -84,22 +84,24 @@
 
             <div class="play">
                 <div class="play_info">
-                    <div class="info_detail"><strong>추천 아티스트</strong></div>
+                    <div class="info_detail"><strong>비슷한 앨범 추천</strong></div>
                     <table class="table table-dark card_list">
                         <thead>
                         </thead>
                         <tbody>
-                            {% for art in recommended_artists  %}
+                            {% for art in recommended_albums %}
                             <tr>
                                 <td>
-                                    <img src="{{ art.image }}" alt="">
+                                    <a href="{% url 'album_detail' art.pk %}"><img src="{{ art.image }}" alt=""></a>
                                 </td>
                                 <td>
-                                    {{ art.name }}
+                                    <h3>{{ art.title }}</h3>
                                 </td>
-                                <td>인기도 {{ art.popularity }}</td>
+                                <td>
+                                    {{ art.artist.name }}
+                                </td>
                             </tr>
-                            {% endfor %}
+{% endfor %}
                         </tbody>
                     </table>
                 </div>

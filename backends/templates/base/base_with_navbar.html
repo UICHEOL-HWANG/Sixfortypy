@@ -18,7 +18,7 @@
                     <a href="{% url 'music-list' %}">음악목록</a>
                 </li>
                 <li>
-                    <a href="#">추천</a>
+                    <a href="{% url 'recommend' user.pk %}">추천</a>
                 </li>
 
                 {% if user.is_authenticated %}

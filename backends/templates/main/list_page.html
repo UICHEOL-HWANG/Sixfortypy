@@ -17,6 +17,7 @@
                 <th scope="col">앨범</th>
                 <th scope="col">발매일</th>
                 <th scope="col">인기도</th>
+                <th scope="col">찜하기</th>
               </tr>
             </thead>
             {% for song in songs %}
@@ -25,7 +26,8 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>
                   {% if song.album.image %}
-                    <a href="{% url 'album_detail' album_id=song.album.id %}"><img src="{{ song.album.image }}" alt="{{ song.album.title }}"></a>
+                  <a href="{% url 'album_detail' album_id=song.album.id %}"><img src="{{ song.album.image }}"
+                      alt="{{ song.album.title }}"></a>
                   {% else %}
                   <img src="{% static 'images/empty-cover.jpg' %}" alt="empty-cover">
                   {% endif %}
@@ -44,6 +46,15 @@
                 </td>
                 <td>{{ song.album.release_date }}</td>
                 <td>{{ song.popularity }}</td>
+                <td>
+                  <a href="javascript:void(0);" class="bookmark-btn" data-song-id="{{ song.id }}">
+                    {% if song.id in bookmarked_song_ids %}
+                    <i class="bi bi-bookmark-fill"></i> <!-- 북마크 해제 아이콘 -->
+                    {% else %}
+                    <i class="bi bi-bookmark"></i> <!-- 북마크 설정 아이콘 -->
+                    {% endif %}
+                  </a>
+                </td>
               </tr>
 
             </tbody>
@@ -86,3 +97,7 @@
   </div>
 </section>
 {% endblock content %}
+
+{% block bookmarkjs %}
+<script src="{% static 'js/bookmarkcdn.js' %}"></script>
+{% endblock bookmarkjs %}

@@ -31,6 +31,7 @@ class Artist(models.Model):
     id = models.CharField(max_length=100,primary_key=True)
     genres = models.CharField(max_length=50,blank=True, null=True)
     popularity = models.IntegerField(default=0)
+
     def __str__(self):
         return self.name
 
@@ -51,3 +52,12 @@ class Song(models.Model):
     link = models.CharField(max_length=100)
     def __str__(self):
         return self.title
+    
+# 북마크 모델링 설정 
+
+class Bookmark(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'song')  # 같은 노래를 한 사용자가 중복해서 북마크하지 못하도록 설정

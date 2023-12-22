@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}{{ profile_user.nickname }} | Sixfortypy {% endblock title %}
+{% block title %}{{ profile_user.nickname }}을 위한 음악추천 | Sixfortypy {% endblock title %}
 
 {% block content %}
 <main class="site-body">
@@ -14,18 +14,6 @@
 
                 <div class="intro">
                     <h1 class="username">{{ profile_user.nickname }}</h1>
-                    <div>
-                        {% if profile_user == user %}
-                        <a class="edit" href="{% url 'profile-update' %}">
-                            <img class="cp-icon small" src="{% static 'icons/ic-pen.svg' %}" alt="Pen Icon">
-                            프로필 수정
-                        </a>
-                        &#183;
-                        <a class="edit" href="{% url 'account_change_password' %}">
-                            비밀번호 변경
-                        </a>
-                        {% endif %}
-                    </div>
                     <div>
                         {% if profile_user.intro %}
                         <p class="cp-chip intro">{{ profile_user.intro }}</p>
@@ -41,37 +29,35 @@
 
     <div class="content-list max-content-width">
         <div class="header">
-            <h2>{{ profile_user.nickname }}님의 최신 위시리스트</h2>
+            <h2>{{ profile_user.nickname }}님의 취향에 맞는 아티스트 추천</h2>
         </div>
-
         <div class="contents">
 
-            <div class="playlist">
+            <div class="playlist animation">
                 <div class="play">
                     <div class="play_info">
-                        <table class="table table-dark card_list profile_card">
+                        <div class="info_detail"><strong>{{ most_common_genre }} 유형을 가장 많이 선택하셨네요!</strong></div>
+                        <table class="table table-dark card_list">
                             <thead>
                             </thead>
                             <tbody>
-                                {% for song in bookmarked_songs %}
+                                {% for song in recommended_artists %}
                                 <tr>
                                     <td>
-                                        <a href="{% url 'music_detail' song.pk %}"><img src="{{ song.album.image }}" alt=""></a>
+                                        <a href="{% url 'artist_detail' song.pk %}"><img
+                                                src="{{ song.image }}" alt=""></a>
                                     </td>
                                     <td>
-                                        <h3><a href="{% url 'music_detail' song.pk %}">{{ song.title }}</a></h3>
+                                        <h3><a href="{% url 'artist_detail' song.pk %}">{{ song.title }}</a></h3>
                                     </td>
-                                    <td>{{ song.album.artist.genres }}</td>
-                                    {% empty %}
-                                    <div class="empty-class">
-                                        <p class="empty">아직 위시리스트가 없어요</p>
-                                    </div>
-                                    {% endfor %}
+                                    <td>{{ song.name }}</td>
                                 </tr>
-                                
+                                {% empty %}
+                                <div class="empty-class">
+                                    <p class="empty">북마크한 곡이 없네요?</p>
+                                </div>
+                                {% endfor %}
                             </tbody>
-                            
-
                         </table>
                     </div>
                 </div>

@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render
 from django.views.generic import * 
 from django.db import models
@@ -23,6 +24,14 @@ from django.urls import reverse,reverse_lazy
 # 추천시스템을 위한 모듈 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from collections import Counter
+
+# 로그인 검증 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+
+# json return 
+from django.http import JsonResponse
 
 def index(request):
     songs = Song.objects.all()  # 모든 Song 객체를 쿼리
@@ -32,23 +41,99 @@ def index(request):
 class MusicList(ListView):
     model = Song
     template_name = 'main/list_page.html'
-    context_object_name = "songs"  # 이것을 복수형으로 변경하는 것이 좋습니다.
+    context_object_name = "songs" 
     paginate_by = 10
 
     def get_queryset(self):
         # Album과 관련된 Song 객체를 가져오기
         return Song.objects.select_related('album').all()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        # 사용자가 북마크한 노래의 ID 목록 가져오기
+        bookmarked_song_ids = Bookmark.objects.filter(user=user).values_list('song_id', flat=True)
+        context['bookmarked_song_ids'] = bookmarked_song_ids
+
+        return context
+        
 
 
 # 프로필 
-class ProfileVeiw(DetailView):
+class ProfileView(DetailView):
     model = User 
     template_name = "main/profile.html"
     pk_url_kwarg = "user_id"
     
     context_object_name = "profile_user"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.kwargs.get('user_id')
+        user = User.objects.get(pk=user_id)
+
+        # 사용자가 북마크한 노래 목록을 조회
+        bookmarked_songs = Song.objects.filter(bookmark__user=user)
+
+        # 컨텍스트에 북마크한 노래 목록 추가
+        context['bookmarked_songs'] = bookmarked_songs
+        return context
     
 # 프로필 변경 
+
+class RecommendedView(LoginRequiredMixin, DetailView):
+    model= User
+    template_name = "main/recommended_system.html"
+    pk_url_kwarg = "user_id"
+    context_object_name = "profile_user"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.kwargs.get('user_id')
+        user = User.objects.get(pk=user_id)
+
+        # 사용자가 북마크한 노래 목록을 조회
+        bookmarked_songs = Song.objects.filter(bookmark__user=user)
+        
+
+        # 북마크된 노래와 관련된 아티스트 정보를 가져옵니다.
+        related_artists = Artist.objects.filter(albums__songs__in=bookmarked_songs).distinct()
+        
+        # 아티스트 장르 정보를 가져와 TF-IDF 벡터화합니다.
+        artist_genres = [artist.genres for artist in related_artists]
+        vectorizer = TfidfVectorizer()
+        genre_matrix = vectorizer.fit_transform(artist_genres)
+
+        # 코사인 유사도를 계산합니다.
+        cosine_similarities = cosine_similarity(genre_matrix, genre_matrix)
+
+        # 유사도에 따라 아티스트를 정렬하고 상위 N개 추출
+        recommended_artists = []
+        for idx, artist in enumerate(related_artists):
+            similarity_scores = list(enumerate(cosine_similarities[idx]))
+            similarity_scores = sorted(similarity_scores, key=lambda x: x[1], reverse=True)
+            for i, score in similarity_scores[1:6]:
+                if related_artists[i].id not in recommended_artists:
+                    recommended_artists.append(related_artists[i].id)
+
+        context['recommended_artists'] = Artist.objects.filter(id__in=recommended_artists)
+        actual_artists = context['recommended_artists']
+        genres = [genre for artist in actual_artists for genre in artist.genres.split(',') if artist.genres]
+        most_common_genre = Counter(genres).most_common(1)[0][0] if genres else '장르 없음'
+        genre_counter = Counter()
+        for song in bookmarked_songs:
+            # 장르를 추출하고 카운트를 업데이트합니다
+            if song.album and song.album.artist and song.album.artist.genres:
+                genres = song.album.artist.genres.split(',')
+                genre_counter.update(genres)
+
+        context['genre_counter'] = genre_counter
+        
+        context['most_common_genre'] = most_common_genre
+        
+        return context
+    
 
 class ProfileUpdateView(UpdateView):
     model = User 
@@ -63,6 +148,23 @@ class ProfileUpdateView(UpdateView):
     
     def get_success_url(self):
         return reverse("profile",kwargs=({"user_id":self.request.user.id}))
+
+# 프로필 내에 북마크 
+
+class BookmarkSongView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        song_id = request.POST.get('song_id')
+        song = get_object_or_404(Song, id=song_id)
+
+        bookmark, created = Bookmark.objects.get_or_create(user=user, song=song)
+        if not created:
+            bookmark.delete()
+            
+            return JsonResponse({'status': 'removed'})
+
+        return JsonResponse({'status': 'added'})
+
 
 
 # 특정 음악 클릭했을 때 디테일 페이지
@@ -97,8 +199,6 @@ class AlbumDetailView(DetailView):
         context['artist'] = album.artist  # 현재 앨범과 연결된 아티스트
         
         # 코사인 유사도 
-        
-        # 모든 아티스트의 장르 데이터 가져오기
         all_artists = Artist.objects.all()
         genres = [artist.genres for artist in all_artists]  # 예시: 각 아티스트의 장르 사용
 
@@ -113,10 +213,13 @@ class AlbumDetailView(DetailView):
 
         # 유사도에 따라 아티스트 정렬 및 상위 N개 추출
         similarity_scores = sorted(similarity_scores, key=lambda x: x[1], reverse=True)
-        recommended_artist_ids = [all_artists[i].id for i, score in similarity_scores[1:6]]  # 상위 5개, 현재 아티스트 제외
+        recommended_artist_ids = [all_artists[i].id for i, score in similarity_scores[1:6]]
 
-        # 추천 아티스트
-        context['recommended_artists'] = Artist.objects.filter(id__in=recommended_artist_ids)
+        # 유사한 아티스트의 앨범 추천
+        recommended_albums = Album.objects.filter(artist__id__in=recommended_artist_ids).distinct()
+
+        # 컨텍스트에 추천 앨범 추가
+        context['recommended_albums'] = recommended_albums[1:10]
 
         return context
 
@@ -134,6 +237,26 @@ class ArtistDetailView(DetailView):
         # 고유한 앨범 목록 추가
         unique_albums = Album.objects.filter(artist__id=artist_id).distinct()
         context['unique_albums'] = unique_albums
+        
+        # 모든 아티스트의 장르 데이터 가져오기
+        all_artists = Artist.objects.all()
+        genres = [artist.genres for artist in all_artists]
+
+        # TF-IDF 벡터화
+        vectorizer = TfidfVectorizer()
+        genre_matrix = vectorizer.fit_transform(genres)
+
+        # 현재 아티스트와 다른 아티스트들 간의 코사인 유사도 계산
+        cosine_similarities = cosine_similarity(genre_matrix)
+        current_artist_index = list(all_artists).index(Artist.objects.get(id=artist_id))
+
+        # 유사도에 따라 아티스트 정렬 및 상위 N개 추출
+        similarity_scores = list(enumerate(cosine_similarities[current_artist_index]))
+        similarity_scores = sorted(similarity_scores, key=lambda x: x[1], reverse=True)
+        recommended_artist_ids = [all_artists[i].id for i, score in similarity_scores[1:6]]
+
+        # 추천 아티스트
+        context['recommended_artists'] = Artist.objects.filter(id__in=recommended_artist_ids)
 
         return context
 

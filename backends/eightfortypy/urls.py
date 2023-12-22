@@ -7,6 +7,11 @@ urlpatterns = [
     
     #음악 목록 
     path('music_list/',views.MusicList.as_view(),name="music-list"),
+    # 추천
+    path('music_recommended/<int:user_id>/', views.RecommendedView.as_view(), name="recommend"),
+
+    
+    
     
     ## 디테일 페이지 
     # 음악 디테일 
@@ -18,11 +23,13 @@ urlpatterns = [
     
     ## 계정관련
     # 프로필 
-    path('users/<int:user_id>/',views.ProfileVeiw.as_view(),name = "profile"),   
+    path('users/<int:user_id>/',views.ProfileView.as_view(),name = "profile"),   
     # 프로필 수정 
     path('edit-profile/',views.ProfileUpdateView.as_view(),name="profile-update"),
     # 검색결과 
     path('search/', views.search_track, name='search_and_save_track'),
+    # 프로필 북마크 
+    path('bookmark/song/',views.BookmarkSongView.as_view(), name='bookmark_song'),
     
     
 ]
