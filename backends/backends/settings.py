@@ -22,12 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-w$n*&qk^$2g5ki5yi!&=0#kpygbxb5s78^y+o*!b#2d)0(bp8#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', 1))
+SECRET_KEY = os.environ.get("SECRET_KEY",'django-insecure-w$n*&qk^$2g5ki5yi!&=0#kpygbxb5s78^y+o*!b#2d)0(bp8#')
 
-ALLOWED_HOSTS = ['*']
+
+if os.environ.get('DJANGO_ALLOWED_HOSTS'):
+    ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(',')
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -92,28 +96,33 @@ WSGI_APPLICATION = 'backends.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-# pymysql.install_as_MySQLdb() 
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'test_db',
-#         'USER': 'admin',
-#         'PASSWORD': '1234',
-#         'HOST': 'db',
-#         'PORT': '3306',
-#     }
-# }
+pymysql.install_as_MySQLdb() 
 
 # 추후에 웹 모듈 모두 완성하면 이걸로 대체 할 예정
 
-# 기본 데이터베이스
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / "db.sqlite3",
+        'ENGINE': os.environ.get('MYSQL_ENGINE', 'django.db.backends.mysql'),
+        'NAME': os.environ.get('MYSQL_DATABASE', 'Sixfortypy_db'),
+        'USER': os.environ.get('MYSQL_USER', 'admin'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', '1234'),
+        'HOST': os.environ.get('MYSQL_HOST', 'mysql_second_db'),
+        'PORT': '3306', 
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
     }
 }
+
+
+
+# 기본 데이터베이스
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 
 # Password validation

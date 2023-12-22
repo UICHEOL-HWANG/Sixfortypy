@@ -270,3 +270,4 @@ venv.bat
 **/migrations/
 
 /backends/eightfortypy/api_key.py 
+/backends/.env.prod
