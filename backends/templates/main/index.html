@@ -13,17 +13,7 @@
                 <form method="post" action="{% url 'search_and_save_track' %}">
                     <!-- 검색종류 -->
                     {% csrf_token %}
-                    <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">Search</button> -->
-                    <!-- <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Artist</a></li>
-                        <li><a class="dropdown-item" href="#">Track</a></li>
-                        <li><a class="dropdown-item" href="#">Genre</a></li>
-                    </ul> -->
-                    <!-- 검색창 -->
                     <input class="form-control" type="search" name="query" placeholder="검색어를 입력하세요">
-                    <!-- 검색버튼 -->
-
                     <button type="submit" class="btn btn-secondary" style="
                     border-radius: 0 5px 5px 0">
                         <span class="hide">검색버튼</span>

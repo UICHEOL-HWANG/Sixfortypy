@@ -3,6 +3,8 @@
 /* font-family: 'Dongle', sans-serif; */
 /*  공통 css  */
 
+
+
 html,
 body {
   margin: 0;
@@ -18,6 +20,7 @@ body {
   /* overflow: hidden; */
   /* 스크롤바 없애기(스크롤안됨!) */
   background-color: #000;
+
 }
 
 /* 공통셋팅 */
