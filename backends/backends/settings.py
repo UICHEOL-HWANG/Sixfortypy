@@ -96,34 +96,23 @@ WSGI_APPLICATION = 'backends.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-# pymysql.install_as_MySQLdb() 
+pymysql.install_as_MySQLdb() 
 
 # 추후에 웹 모듈 모두 완성하면 이걸로 대체 할 예정
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.environ.get('MYSQL_ENGINE', 'django.db.backends.mysql'),
-#         'NAME': os.environ.get('MYSQL_DATABASE', 'Sixfortypy_db'),
-#         'USER': os.environ.get('MYSQL_USER', 'admin'),
-#         'PASSWORD': os.environ.get('MYSQL_PASSWORD', '1234'),
-#         'HOST': os.environ.get('MYSQL_HOST', 'mysql_second_db'),
-#         'PORT': '3306', 
-#         'OPTIONS': {
-#             'charset': 'utf8mb4',
-#         },
-#     }
-# }
-
-
-
-# 기본 데이터베이스
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / "db.sqlite3",
+        'ENGINE': os.environ.get('MYSQL_ENGINE', 'django.db.backends.mysql'),
+        'NAME': os.environ.get('MYSQL_DATABASE', 'Sixfortypy_db'),
+        'USER': os.environ.get('MYSQL_USER', 'admin'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD', '1234'),
+        'HOST': os.environ.get('MYSQL_HOST', 'mysql_second_db'),
+        'PORT': '3306', 
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
