@@ -58,9 +58,12 @@ class MusicList(ListView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
 
-        # 사용자가 북마크한 노래의 ID 목록 가져오기
-        bookmarked_song_ids = Bookmark.objects.filter(user=user).values_list('song_id', flat=True)
-        context['bookmarked_song_ids'] = bookmarked_song_ids
+        if user.is_authenticated:
+            bookmarked_song_ids = Bookmark.objects.filter(user=user).values_list('song_id', flat=True)
+            context['bookmarked_song_ids'] = bookmarked_song_ids
+        else:
+            # 로그인하지 않은 사용자의 경우 빈 목록 설정
+            context['bookmarked_song_ids'] = []
 
         return context
         
@@ -274,7 +277,12 @@ def search_track(request):
         track_name = request.POST.get('query')
         api = UseApi(client_id_spotify, client_pw_spotify)  # Spotify API 인스턴스 생성
         album_data, artist_data, song_data, each_track, related_track = api.search_track(track_name)
-
+        release_date_str = album_data['release_date']
+        try:
+            release_date = datetime.strptime(release_date_str, "%Y-%m-%d").date()
+        except ValueError:
+            release_date = None  # 날짜 형식이 아닌 경우 None으로 처리
+        
         # 아티스트 정보 확인 및 저장
         artist, created = Artist.objects.get_or_create(id=artist_data['artist_id'], defaults={
             'name': artist_data['artist_name'],
@@ -287,7 +295,7 @@ def search_track(request):
         album, created = Album.objects.get_or_create(id=album_data['album_id'], defaults={
             'title': album_data['album_name'],
             'artist': artist,
-            'release_date': album_data['release_date'],
+            'release_date': release_date,
             'image': album_data['album_image']
         })
 

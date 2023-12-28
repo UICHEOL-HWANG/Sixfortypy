@@ -13,15 +13,15 @@
                 <form method="post" action="{% url 'search_and_save_track' %}">
                     <!-- 검색종류 -->
                     {% csrf_token %}
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">Search</button>
-                    <ul class="dropdown-menu">
+                    <!-- <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">Search</button> -->
+                    <!-- <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Artist</a></li>
                         <li><a class="dropdown-item" href="#">Track</a></li>
                         <li><a class="dropdown-item" href="#">Genre</a></li>
-                    </ul>
+                    </ul> -->
                     <!-- 검색창 -->
-                    <input type="search" name="query" placeholder="검색어를 입력하세요">
+                    <input class="form-control" type="search" name="query" placeholder="검색어를 입력하세요">
                     <!-- 검색버튼 -->
 
                     <button type="submit" class="btn btn-secondary" style="
@@ -34,36 +34,16 @@
                             </path>
                         </svg>
                     </button>
+                    
                 </form>
-                <!-- <div class="search">
-                    <button type="button">
-                        <span class="hide">카테고리버튼</span>
-                    </button>
-                    <input type="text" placeholder="검색어를 입력해주세요.">
-                    <button>
-                        <span class="hide">검색아이콘</span>
-                    </button>
-                </div> -->
+
             </div>
-            <!-- <div class="input-group mb-3">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">Search</button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Artist</a></li>
-                    <li><a class="dropdown-item" href="#">Track</a></li>
-                    <li><a class="dropdown-item" href="#">Genre</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                </ul>
-                <input type="text" class="form-control" aria-label="Text input with dropdown button">
-            </div> -->
+
             <h2>Sixfortypy <br>
                 Recommend
             </h2>
             <div class="record">
-                <!-- <img src="./images/record.png" alt="레코드판"> -->
+            
             </div>
 
         </div>

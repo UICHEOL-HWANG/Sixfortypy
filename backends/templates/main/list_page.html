@@ -17,8 +17,13 @@
                 <th scope="col">앨범</th>
                 <th scope="col">발매일</th>
                 <th scope="col">인기도</th>
+                {% if user.is_authenticated %}
                 <th scope="col">찜하기</th>
+                {% else %}
+                <th></th>
+                {% endif %}
               </tr>
+
             </thead>
             {% for song in songs %}
             <tbody>
@@ -47,6 +52,7 @@
                 <td>{{ song.album.release_date }}</td>
                 <td>{{ song.popularity }}</td>
                 <td>
+                  {% if user.is_authenticated %}
                   <a href="javascript:void(0);" class="bookmark-btn" data-song-id="{{ song.id }}">
                     {% if song.id in bookmarked_song_ids %}
                     <i class="bi bi-bookmark-fill"></i> <!-- 북마크 해제 아이콘 -->
@@ -54,6 +60,7 @@
                     <i class="bi bi-bookmark"></i> <!-- 북마크 설정 아이콘 -->
                     {% endif %}
                   </a>
+                  {% endif %}
                 </td>
               </tr>
 
@@ -78,13 +85,15 @@
           </a>
         </li>
         {% endif %}
-
+    
         {% for num in page_obj.paginator.page_range %}
-        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-        </li>
+          {% if num <= page_obj.paginator.num_pages %} {# 최대 페이지 수를 확인 #}
+          <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+          {% endif %}
         {% endfor %}
-
+    
         {% if page_obj.has_next %}
         <li class="page-item">
           <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">

@@ -1,7 +1,6 @@
 /* 구글시트불러오기 */
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap');
 /* font-family: 'Dongle', sans-serif; */
-
 /*  공통 css  */
 
 html,
@@ -494,7 +493,7 @@ header .gnb li {
 }
 .playlist .play .play_info .table.card_list tbody tr td h3{
   display: block;
-  margin-top: 10px;
+  margin-top: -9px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

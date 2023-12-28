@@ -56,7 +56,8 @@
                             <tr>
                                 <th scope="row">{{ forloop.counter }}</th>
                                 <td>
-                                    <a href="{% url 'album_detail' song.album.pk %}"><img src="{{ song.album.image }}" alt="{{ song.album.title }}"></a>
+                                    <a href="{% url 'album_detail' song.album.pk %}"><img src="{{ song.album.image }}"
+                                            alt="{{ song.album.title }}"></a>
                                     <h3><a href="{% url 'music_detail' song.pk %}">{{ song.title }}</a></h3>
                                     <p>{{ artist.name }}</p>
                                 </td>
@@ -87,7 +88,8 @@
                             {% for album in unique_albums %}
                             <tr>
                                 <td>
-                                    <a href="{% url 'album_detail' album.pk %}"><img src="{{ album.image }}" alt="{{ album.title }}"></a>
+                                    <a href="{% url 'album_detail' album.pk %}"><img src="{{ album.image }}"
+                                            alt="{{ album.title }}"></a>
                                 </td>
                                 <td>
                                     <h3><a href="{% url 'album_detail' album.pk %}">{{ album.title }}</a></h3>
@@ -112,12 +114,16 @@
                             {% for recom_artist in recommended_artists %}
                             <tr>
                                 <td>
-                                    <a href="{% url 'artist_detail' recom_artist.pk %}"><img src="{{ recom_artist.image }}" alt="{{ recom_artist.name }}"></a>
+                                    <a href="{% url 'artist_detail' recom_artist.pk %}"><img
+                                            src="{{ recom_artist.image }}" alt="{{ recom_artist.name }}"></a>
                                 </td>
                                 <td>
-                                    <h3><a href="{% url 'artist_detail' recom_artist.pk %}">{{ recom_artist.name }}</a></h3>
+                                    <h3><a href="{% url 'artist_detail' recom_artist.pk %}">{{ recom_artist.name }}</a>
+                                    </h3>
                                 </td>
-                                <td>{{ recom_artist.genres }}</td>
+                                <td>
+                                    <h3>{{ recom_artist.genres }}</h3>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
