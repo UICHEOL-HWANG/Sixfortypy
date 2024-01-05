@@ -33,10 +33,10 @@ ERD_CLOUD : https://www.erdcloud.com/d/Y6QKTjKWbS3FwfZXs
 ## 페이지시연 
 * 음악검색 
 
-![검색](https://github.com/UICHEOL-HWANG/Sixfortypy/assets/109947779/36bf1b6d-f6e7-42bf-8459-0f1e2a4f814a)
+![검색](https://github.com/UICHEOL-HWANG/Sixfortypy/assets/109947779/cc08970d-9ab1-4236-b783-3c75ab6c5761)
 
 * 회원별 맞춤 음악 추천 시스템
 
-![추천시스템](https://github.com/UICHEOL-HWANG/Sixfortypy/assets/109947779/a470c540-0d4c-450a-85ba-86f6a45c7dff)
+![추천시스템](https://github.com/UICHEOL-HWANG/Sixfortypy/assets/109947779/a78b77c2-8219-43bd-80c5-aa9327a94460)
 
 ---
