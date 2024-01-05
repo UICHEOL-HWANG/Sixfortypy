@@ -37,6 +37,6 @@ ERD_CLOUD : https://www.erdcloud.com/d/Y6QKTjKWbS3FwfZXs
 
 * 회원별 맞춤 음악 추천 시스템
 
-![추천시스템](https://github.com/UICHEOL-HWANG/Sixfortypy/assets/109947779/a78b77c2-8219-43bd-80c5-aa9327a94460)
+![추천시스템](https://github.com/UICHEOL-HWANG/Sixfortypy/assets/109947779/d7eec649-cf35-43a7-9341-296648125b02)
 
 ---
